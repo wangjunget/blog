@@ -5,5 +5,5 @@ next: false
 
 
 
-![JavaScript](./static/image/JavaScript-index.png)
+![JavaScript](./static/image/javaScript-index.png)
 
