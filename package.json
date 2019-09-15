@@ -6,5 +6,8 @@
     "docs:build": "vuepress build docs"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.24.0"
+  }
 }

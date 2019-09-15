@@ -1,5 +1,6 @@
 ---
 title: Python
+next: false
 ---
 
-# Hello Python!
+![Python](./static/image/python-index.png)
