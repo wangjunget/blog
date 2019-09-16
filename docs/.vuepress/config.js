@@ -11,7 +11,8 @@ module.exports = {
                 return moment(timestamp).format('YYYY-MM-DD HH:mm:ss')
               }
             }
-          ]
+        ],
+        ['@vuepress/back-to-top']
     ],
     themeConfig: {
         repo: 'wangjunget/blog-vuepress',

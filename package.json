@@ -9,5 +9,9 @@
   "license": "ISC",
   "dependencies": {
     "moment": "^2.24.0"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.0.0-rc.1",
+    "vuepress": "^1.1.0"
   }
 }
