@@ -4,6 +4,7 @@ module.exports = {
     plugins: [
         [
             '@vuepress/last-updated',
+            false,
             {
               transformer: (timestamp, lang) => {
                 const moment = require('moment')
@@ -18,7 +19,7 @@ module.exports = {
         repo: 'wangjunget/blog-vuepress',
         // editLinks: true,
         editLinkText: '编辑此页',
-        lastUpdated: '最近更新',
+        // lastUpdated: '最近更新',
         head: [
             ['link', { rel: 'icon', href: './public/favicon.ico'}]
         ],
@@ -45,7 +46,7 @@ module.exports = {
                     }
                 ]
             },
-            { text: '关于', link: '/about'}
+            // { text: '关于', link: '/about'}
         ],
         sidebarDepth: 2,
         sidebar: {
