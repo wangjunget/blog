@@ -1,11 +1,15 @@
 <template>
     <div class="home-container">
-        <div id="statistics">hello vuepress</div>
+        <div id="statistics"></div>
     </div>
 </template>
 
 <script>
-const echarts = require('echarts')
+const echarts = require('echarts/lib/echarts')
+require('echarts/lib/chart/pie')
+require('echarts/lib/component/title')
+require('echarts/lib/component/tooltip')
+
 
 export default {
     name: 'Home-Statistics',
