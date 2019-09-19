@@ -87,6 +87,12 @@ export default {
 
         const myCharts = echarts.init(document.getElementById('statistics'))
         myCharts.setOption(option);
+        myCharts.on('click', this.echartsClickCallback)
+    },
+    methods: {
+        echartsClickCallback(params) {
+            this.$router.push(`/${params.name}/`)
+        }
     }
 }
 </script>
