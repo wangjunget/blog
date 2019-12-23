@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>递归组件与动态组件 | wangjunget</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.d2b52029.css" as="style"><link rel="preload" href="/assets/js/app.9ff94b6f.js" as="script"><link rel="preload" href="/assets/js/3.49a4f85b.js" as="script"><link rel="preload" href="/assets/js/36.1d5b6d0f.js" as="script"><link rel="prefetch" href="/assets/js/10.5c9ac91e.js"><link rel="prefetch" href="/assets/js/11.2d7ca541.js"><link rel="prefetch" href="/assets/js/12.028623ee.js"><link rel="prefetch" href="/assets/js/13.7ca5c050.js"><link rel="prefetch" href="/assets/js/14.c1eede93.js"><link rel="prefetch" href="/assets/js/15.263c9f1a.js"><link rel="prefetch" href="/assets/js/16.02e6fd27.js"><link rel="prefetch" href="/assets/js/17.f1df8bd6.js"><link rel="prefetch" href="/assets/js/18.572eb5fa.js"><link rel="prefetch" href="/assets/js/19.f10e11a0.js"><link rel="prefetch" href="/assets/js/2.938d3f47.js"><link rel="prefetch" href="/assets/js/20.57228dc9.js"><link rel="prefetch" href="/assets/js/21.f97f3e2c.js"><link rel="prefetch" href="/assets/js/22.c8ff24b1.js"><link rel="prefetch" href="/assets/js/23.07f08242.js"><link rel="prefetch" href="/assets/js/24.22dc477e.js"><link rel="prefetch" href="/assets/js/25.780bbedd.js"><link rel="prefetch" href="/assets/js/26.52d914a9.js"><link rel="prefetch" href="/assets/js/27.acdeb9c3.js"><link rel="prefetch" href="/assets/js/28.64c30fba.js"><link rel="prefetch" href="/assets/js/29.d9cee65a.js"><link rel="prefetch" href="/assets/js/30.d7bd987d.js"><link rel="prefetch" href="/assets/js/31.e96f3ecb.js"><link rel="prefetch" href="/assets/js/32.b77c3adf.js"><link rel="prefetch" href="/assets/js/33.54deba64.js"><link rel="prefetch" href="/assets/js/34.39ad3fbe.js"><link rel="prefetch" href="/assets/js/35.b00ac0d1.js"><link rel="prefetch" href="/assets/js/37.ba3b3540.js"><link rel="prefetch" href="/assets/js/38.2043d007.js"><link rel="prefetch" href="/assets/js/39.a0bb53a0.js"><link rel="prefetch" href="/assets/js/4.d9fe853f.js"><link rel="prefetch" href="/assets/js/40.a6499166.js"><link rel="prefetch" href="/assets/js/41.b8c24b86.js"><link rel="prefetch" href="/assets/js/42.4debb65f.js"><link rel="prefetch" href="/assets/js/43.c072ec3a.js"><link rel="prefetch" href="/assets/js/44.dc67c285.js"><link rel="prefetch" href="/assets/js/45.453f7c18.js"><link rel="prefetch" href="/assets/js/46.504fd32d.js"><link rel="prefetch" href="/assets/js/5.ff12ba21.js"><link rel="prefetch" href="/assets/js/6.f5314280.js"><link rel="prefetch" href="/assets/js/7.3f6fd47e.js"><link rel="prefetch" href="/assets/js/8.3bc8ce07.js"><link rel="prefetch" href="/assets/js/9.dc730228.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.d2b52029.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">wangjunget</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">分类</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>前端</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Vue/" class="nav-link">Vue</a></li><li class="dropdown-subitem"><a href="/JavaScript/" class="nav-link">JavaScript</a></li><li class="dropdown-subitem"><a href="/Css/" class="nav-link">Css</a></li></ul></li><li class="dropdown-item"><h4>开发工具</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Python/" class="nav-link">Python</a></li><li class="dropdown-subitem"><a href="/Git/" class="nav-link">Git</a></li><li class="dropdown-subitem"><a href="/Linux/" class="nav-link">Linux</a></li></ul></li></ul></div></div> <a href="https://github.com/wangjunget/blog-vuepress" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">分类</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>前端</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Vue/" class="nav-link">Vue</a></li><li class="dropdown-subitem"><a href="/JavaScript/" class="nav-link">JavaScript</a></li><li class="dropdown-subitem"><a href="/Css/" class="nav-link">Css</a></li></ul></li><li class="dropdown-item"><h4>开发工具</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Python/" class="nav-link">Python</a></li><li class="dropdown-subitem"><a href="/Git/" class="nav-link">Git</a></li><li class="dropdown-subitem"><a href="/Linux/" class="nav-link">Linux</a></li></ul></li></ul></div></div> <a href="https://github.com/wangjunget/blog-vuepress" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><a href="/Books/Vue.js 组件精讲/" class="sidebar-heading clickable open"><span>Vue.js 组件精讲</span> <span class="arrow down"></span></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/Books/Vue.js 组件精讲/开篇：Vue.js 的精髓——组件.html" class="sidebar-link">开篇：Vue.js 的精髓——组件</a></li><li><a href="/Books/Vue.js 组件精讲/基础：Vue.js 组件的三个 API：prop、event、slot.html" class="sidebar-link">基础：Vue.js 组件的三个 API：prop、event、slot</a></li><li><a href="/Books/Vue.js 组件精讲/组件的通信 1：provide   inject.html" class="sidebar-link">组件的通信 1：provide / inject</a></li><li><a href="/Books/Vue.js 组件精讲/组件的通信 2：派发与广播——自行实现 dispatch 和 broadcast 方法.html" class="sidebar-link">组件的通信 2：派发与广播——自行实现 dispatch 和 broadcast 方法</a></li><li><a href="/Books/Vue.js 组件精讲/实战 1：具有数据校验功能的表单组件——Form.html" class="sidebar-link">实战 1：具有数据校验功能的表单组件——Form</a></li><li><a href="/Books/Vue.js 组件精讲/组件的通信 3：找到任意组件实例——findComponents 系列方法.html" class="sidebar-link">组件的通信 3：找到任意组件实例——findComponents 系列方法</a></li><li><a href="/Books/Vue.js 组件精讲/实战 2：组合多选框组件——CheckboxGroup &amp; Checkbox.html" class="sidebar-link">实战 2：组合多选框组件——CheckboxGroup &amp; Checkbox</a></li><li><a href="/Books/Vue.js 组件精讲/Vue 的构造器——extend 与手动挂载——$mount.html" class="sidebar-link">Vue 的构造器——extend 与手动挂载——$mount</a></li><li><a href="/Books/Vue.js 组件精讲/实战 3：动态渲染 .vue 文件的组件—— Display.html" class="sidebar-link">实战 3：动态渲染 .vue 文件的组件—— Display</a></li><li><a href="/Books/Vue.js 组件精讲/实战 4：全局提示组件——$Alert.html" class="sidebar-link">实战 4：全局提示组件——$Alert</a></li><li><a href="/Books/Vue.js 组件精讲/更灵活的组件：Render 函数与 Functional Render.html" class="sidebar-link">更灵活的组件：Render 函数与 Functional Render</a></li><li><a href="/Books/Vue.js 组件精讲/递归组件与动态组件.html" class="active sidebar-link">递归组件与动态组件</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Books/Vue.js 组件精讲/递归组件与动态组件.html#递归组件" class="sidebar-link">递归组件</a></li><li class="sidebar-sub-header"><a href="/Books/Vue.js 组件精讲/递归组件与动态组件.html#动态组件" class="sidebar-link">动态组件</a></li><li class="sidebar-sub-header"><a href="/Books/Vue.js 组件精讲/递归组件与动态组件.html#结语" class="sidebar-link">结语</a></li><li class="sidebar-sub-header"><a href="/Books/Vue.js 组件精讲/递归组件与动态组件.html#扩展阅读" class="sidebar-link">扩展阅读</a></li></ul></li><li><a href="/Books/Vue.js 组件精讲/实战 7：树形控件——Tree.html" class="sidebar-link">实战 7：树形控件——Tree</a></li><li><a href="/Books/Vue.js 组件精讲/拓展：Vue.js 容易忽略的 API 详解.html" class="sidebar-link">拓展：Vue.js 容易忽略的 API 详解</a></li><li><a href="/Books/Vue.js 组件精讲/拓展：Vue.js 面试、常见问题答疑.html" class="sidebar-link">拓展：Vue.js 面试、常见问题答疑</a></li><li><a href="/Books/Vue.js 组件精讲/拓展：如何做好一个开源项目（上篇）.html" class="sidebar-link">拓展：如何做好一个开源项目（上篇）</a></li><li><a href="/Books/Vue.js 组件精讲/拓展：如何做好一个开源项目（下篇）.html" class="sidebar-link">拓展：如何做好一个开源项目（下篇）</a></li><li><a href="/Books/Vue.js 组件精讲/写在最后.html" class="sidebar-link">写在最后</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="递归组件与动态组件"><a href="#递归组件与动态组件" aria-hidden="true" class="header-anchor">#</a> 递归组件与动态组件</h1> <h2 id="递归组件"><a href="#递归组件" aria-hidden="true" class="header-anchor">#</a> 递归组件</h2> <p>递归组件就是指组件在模板中调用自己，开启递归组件的必要条件，就是在组件中设置一个 <code>name</code> 选项。比如下面的示例：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;my-component&gt;&lt;/my-component&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    name: 'my-component'
+  }
+&lt;/script&gt;
+
+</code></pre></div><p>在 Webpack 中导入一个 Vue.js 组件，一般是通过 <code>import myComponent from 'xxx'</code> 这样的语法，然后在当前组件（页面）的 <code>components: { myComponent }</code> 里注册组件。这种组件是不强制设置 <code>name</code> 字段的，组件的名字都是使用者在 import 进来后自定义的，但递归组件的使用者是组件自身，它得知道这个组件叫什么，因为没有用 <code>components</code> 注册，所以 <code>name</code> 字段就是必须的了。除了递归组件用 <code>name</code>，我们在之前的小节也介绍过，用一些特殊的方法，通过遍历匹配组件的 name 选项来寻找组件实例。</p> <p>不过呢，上面的示例是有问题的，如果直接运行，会抛出 <code>max stack size exceeded</code> 的错误，因为组件会无限递归下去，死循环。解决这个问题，就要给递归组件一个限制条件，一般会在递归组件上用 <code>v-if</code> 在某个地方设置为 <code>false</code> 来终结。比如我们给上面的示例加一个属性 count，当大于 5 时就不再递归：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;my-component :count=&quot;count + 1&quot; v-if=&quot;count &lt;= 5&quot;&gt;&lt;/my-component&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    name: 'my-component',
+    props: {
+      count: {
+        type: Number,
+        default: 1
+      }
+    }
+  }
+&lt;/script&gt;
+
+</code></pre></div><p>所以，总结下来，实现一个递归组件的必要条件是：</p> <ul><li>要给组件设置 <strong>name</strong>；</li> <li>要有一个明确的结束条件</li></ul> <p>递归组件常用来开发具有未知层级关系的独立组件，在业务开发中很少使用。比如常见的有级联选择器和树形控件：</p> <p><img src="https://user-gold-cdn.xitu.io/2018/11/22/167398b8f5a828b1?w=1600&amp;h=676&amp;f=png&amp;s=44587" alt=""></p> <p>这类组件一般都是数据驱动型的，父级有一个字段 children，然后递归。下一节的实战，会开发一个树形控件 Tree。</p> <h2 id="动态组件"><a href="#动态组件" aria-hidden="true" class="header-anchor">#</a> 动态组件</h2> <p>有的时候，我们希望根据一些条件，动态地切换某个组件，或动态地选择渲染某个组件。在之前小节介绍函数式组件 Functional Render 时，已经说过，它是一个没有上下文的函数，常用于程序化地在多个组件中选择一个。使用 Render 或 Functional Render 可以解决动态切换组件的需求，不过那是基于一个 JS 对象（Render 函数），而 Vue.js 提供了另外一个内置的组件 <code>&lt;component&gt;</code> 和 <code>is</code> 特性，可以更好地实现动态组件。</p> <p>先来看一个 <code>&lt;component&gt;</code> 和 <code>is</code> 的基本示例，首先定义三个普通组件：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;!-- a.vue --&gt;
+&lt;template&gt;
+  &lt;div&gt;
+    组件 A
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+
+  }
+&lt;/script&gt;
+
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>&lt;!-- b.vue --&gt;
+&lt;template&gt;
+  &lt;div&gt;
+    组件 B
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+
+  }
+&lt;/script&gt;
+
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>&lt;!-- c.vue --&gt;
+&lt;template&gt;
+  &lt;div&gt;
+    组件 C
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+
+  }
+&lt;/script&gt;
+
+</code></pre></div><p>然后在父组件中导入这 3 个组件，并动态切换：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;button @click=&quot;handleChange('A')&quot;&gt;显示 A 组件&lt;/button&gt;
+    &lt;button @click=&quot;handleChange('B')&quot;&gt;显示 B 组件&lt;/button&gt;
+    &lt;button @click=&quot;handleChange('C')&quot;&gt;显示 C 组件&lt;/button&gt;
+
+    &lt;component :is=&quot;component&quot;&gt;&lt;/component&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  import componentA from '../components/a.vue';
+  import componentB from '../components/b.vue';
+  import componentC from '../components/c.vue';
+
+  export default {
+    data () {
+      return {
+        component: componentA
+      }
+    },
+    methods: {
+      handleChange (component) {
+        if (component === 'A') {
+          this.component = componentA;
+        } else if (component === 'B') {
+          this.component = componentB;
+        } else if (component === 'C') {
+          this.component = componentC;
+        }
+      }
+    }
+  }
+&lt;/script&gt;
+
+</code></pre></div><p>这里的 <code>is</code> 动态绑定的是一个组件对象（Object），它直接指向 a / b / c 三个组件中的一个。除了直接绑定一个 Object，还可以是一个 String，比如标签名、组件名。下面的这个组件，将原生的按钮 button 进行了封装，如果传入了 <code>prop: to</code>，那它会渲染为一个 <code>&lt;a&gt;</code> 标签，用于打开这个链接地址，如果没有传入 <code>to</code>，就当作普通 button 使用。来看下面的示例：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;!-- button.vue --&gt;
+&lt;template&gt;
+  &lt;component :is=&quot;tagName&quot; v-bind=&quot;tagProps&quot;&gt;
+    &lt;slot&gt;&lt;/slot&gt;
+  &lt;/component&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    props: {
+      // 链接地址
+      to: {
+        type: String,
+        default: ''
+      },
+      // 链接打开方式，如 _blank
+      target: {
+        type: String,
+        default: '_self'
+      }
+    },
+    computed: {
+      // 动态渲染不同的标签
+      tagName () {
+        return this.to === '' ? 'button' : 'a';
+      },
+      // 如果是链接，把这些属性都绑定在 component 上
+      tagProps () {
+        let props = {};
+
+        if (this.to) {
+          props = {
+            target: this.target,
+            href: this.to
+          }
+        }
+
+        return props;
+      }
+    }
+  }
+&lt;/script&gt;
+
+</code></pre></div><p>使用组件：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;i-button&gt;普通按钮&lt;/i-button&gt;
+    &lt;br&gt;
+    &lt;i-button to=&quot;https://juejin.im&quot;&gt;链接按钮&lt;/i-button&gt;
+    &lt;br&gt;
+    &lt;i-button to=&quot;https://juejin.im&quot; target=&quot;_blank&quot;&gt;新窗口打开链接按钮&lt;/i-button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  import iButton from '../components/a.vue';
+
+  export default {
+    components: { iButton }
+  }
+&lt;/script&gt;
+
+</code></pre></div><p>最终会渲染出一个原生的 <code>&lt;button&gt;</code> 按钮和两个原生的链接 <code>&lt;a&gt;</code>，且第二个点击会在新窗口中打开链接，如图：</p> <p><img src="https://user-gold-cdn.xitu.io/2018/11/22/167398c004dc0c60?w=328&amp;h=166&amp;f=png&amp;s=18861" alt=""></p> <p>i-button 组件中的 <code>&lt;component&gt;</code> <code>is</code> 绑定的就是一个标签名称 button / a，并且通过 <code>v-bind</code> 将一些额外的属性全部绑定到了 <code>&lt;component&gt;</code> 上。</p> <p>再回到第一个 a / b / c 组件切换的示例，如果这类的组件，频繁切换，事实上组件是会重新渲染的，比如我们在组件 A 里加两个生命周期：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;!-- a.vue --&gt;
+&lt;template&gt;
+  &lt;div&gt;
+    组件 A
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    mounted () {
+      console.log('组件创建了');
+    },
+    beforeDestroy () {
+      console.log('组件销毁了');
+    }
+  }
+&lt;/script&gt;
+
+</code></pre></div><p>只要切换到 A 组件，<code>mounted</code> 就会触发一次，切换到其它组件，<code>beforeDestroy</code> 也会触发一次，说明组件再重新渲染，这样有可能导致性能问题。为了避免组件的重复渲染，可以在 <code>&lt;component&gt;</code> 外层套一个 Vue.js 内置的 <code>&lt;keep-alive&gt;</code> 组件，这样，组件就会被缓存起来：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;keep-alive&gt;
+  &lt;component :is=&quot;component&quot;&gt;&lt;/component&gt;
+&lt;/keep-alive&gt;
+
+</code></pre></div><p>这时，只有 <code>mounted</code> 触发了，如果不离开当前页面，切换到其它组件，<code>beforeDestroy</code> 不会被触发，说明组件已经被缓存了。</p> <p>keep-alive 还有一些额外的 props 可以配置：</p> <ul><li><code>include</code>：字符串或正则表达式。只有名称匹配的组件会被缓存。</li> <li><code>exclude</code>：字符串或正则表达式。任何名称匹配的组件都不会被缓存。</li> <li><code>max</code>：数字。最多可以缓存多少组件实例。</li></ul> <h2 id="结语"><a href="#结语" aria-hidden="true" class="header-anchor">#</a> 结语</h2> <p>还有一类是异步组件，Vue.js 文档已经介绍的很清楚了，可以阅读文末的扩展阅读 1。事实上异步组件我们用的很多，比如 router 的配置列表，一般都是用的异步组件形式：</p> <div class="language- extra-class"><pre class="language-text"><code>{
+  path: '/form',
+  component: () =&gt; import('./views/form.vue')
+}
+
+</code></pre></div><p>这样每个页面才会在路由到时才加载对应的 JS 文件，否则入口文件会非常庞大。</p> <p>递归组件、动态组件和异步组件是 Vue.js 中相对冷门的 3 种组件模式，不过在封装复杂的独立组件时，前两者会经常使用。</p> <h2 id="扩展阅读"><a href="#扩展阅读" aria-hidden="true" class="header-anchor">#</a> 扩展阅读</h2> <ul><li><a href="https://cn.vuejs.org/v2/guide/components-dynamic-async.html#%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6" target="_blank" rel="noopener noreferrer">异步组件<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/Books/Vue.js 组件精讲/更灵活的组件：Render 函数与 Functional Render.html" class="prev">更灵活的组件：Render 函数与 Functional Render</a></span> <span class="next"><a href="/Books/Vue.js 组件精讲/实战 7：树形控件——Tree.html">实战 7：树形控件——Tree</a>→
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.9ff94b6f.js" defer></script><script src="/assets/js/3.49a4f85b.js" defer></script><script src="/assets/js/36.1d5b6d0f.js" defer></script>
+  </body>
+</html>

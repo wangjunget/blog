@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>实战 1：具有数据校验功能的表单组件——Form | wangjunget</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.d2b52029.css" as="style"><link rel="preload" href="/assets/js/app.9ff94b6f.js" as="script"><link rel="preload" href="/assets/js/3.49a4f85b.js" as="script"><link rel="preload" href="/assets/js/20.57228dc9.js" as="script"><link rel="prefetch" href="/assets/js/10.5c9ac91e.js"><link rel="prefetch" href="/assets/js/11.2d7ca541.js"><link rel="prefetch" href="/assets/js/12.028623ee.js"><link rel="prefetch" href="/assets/js/13.7ca5c050.js"><link rel="prefetch" href="/assets/js/14.c1eede93.js"><link rel="prefetch" href="/assets/js/15.263c9f1a.js"><link rel="prefetch" href="/assets/js/16.02e6fd27.js"><link rel="prefetch" href="/assets/js/17.f1df8bd6.js"><link rel="prefetch" href="/assets/js/18.572eb5fa.js"><link rel="prefetch" href="/assets/js/19.f10e11a0.js"><link rel="prefetch" href="/assets/js/2.938d3f47.js"><link rel="prefetch" href="/assets/js/21.f97f3e2c.js"><link rel="prefetch" href="/assets/js/22.c8ff24b1.js"><link rel="prefetch" href="/assets/js/23.07f08242.js"><link rel="prefetch" href="/assets/js/24.22dc477e.js"><link rel="prefetch" href="/assets/js/25.780bbedd.js"><link rel="prefetch" href="/assets/js/26.52d914a9.js"><link rel="prefetch" href="/assets/js/27.acdeb9c3.js"><link rel="prefetch" href="/assets/js/28.64c30fba.js"><link rel="prefetch" href="/assets/js/29.d9cee65a.js"><link rel="prefetch" href="/assets/js/30.d7bd987d.js"><link rel="prefetch" href="/assets/js/31.e96f3ecb.js"><link rel="prefetch" href="/assets/js/32.b77c3adf.js"><link rel="prefetch" href="/assets/js/33.54deba64.js"><link rel="prefetch" href="/assets/js/34.39ad3fbe.js"><link rel="prefetch" href="/assets/js/35.b00ac0d1.js"><link rel="prefetch" href="/assets/js/36.1d5b6d0f.js"><link rel="prefetch" href="/assets/js/37.ba3b3540.js"><link rel="prefetch" href="/assets/js/38.2043d007.js"><link rel="prefetch" href="/assets/js/39.a0bb53a0.js"><link rel="prefetch" href="/assets/js/4.d9fe853f.js"><link rel="prefetch" href="/assets/js/40.a6499166.js"><link rel="prefetch" href="/assets/js/41.b8c24b86.js"><link rel="prefetch" href="/assets/js/42.4debb65f.js"><link rel="prefetch" href="/assets/js/43.c072ec3a.js"><link rel="prefetch" href="/assets/js/44.dc67c285.js"><link rel="prefetch" href="/assets/js/45.453f7c18.js"><link rel="prefetch" href="/assets/js/46.504fd32d.js"><link rel="prefetch" href="/assets/js/5.ff12ba21.js"><link rel="prefetch" href="/assets/js/6.f5314280.js"><link rel="prefetch" href="/assets/js/7.3f6fd47e.js"><link rel="prefetch" href="/assets/js/8.3bc8ce07.js"><link rel="prefetch" href="/assets/js/9.dc730228.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.d2b52029.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">wangjunget</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">分类</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>前端</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Vue/" class="nav-link">Vue</a></li><li class="dropdown-subitem"><a href="/JavaScript/" class="nav-link">JavaScript</a></li><li class="dropdown-subitem"><a href="/Css/" class="nav-link">Css</a></li></ul></li><li class="dropdown-item"><h4>开发工具</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Python/" class="nav-link">Python</a></li><li class="dropdown-subitem"><a href="/Git/" class="nav-link">Git</a></li><li class="dropdown-subitem"><a href="/Linux/" class="nav-link">Linux</a></li></ul></li></ul></div></div> <a href="https://github.com/wangjunget/blog-vuepress" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">分类</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>前端</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Vue/" class="nav-link">Vue</a></li><li class="dropdown-subitem"><a href="/JavaScript/" class="nav-link">JavaScript</a></li><li class="dropdown-subitem"><a href="/Css/" class="nav-link">Css</a></li></ul></li><li class="dropdown-item"><h4>开发工具</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Python/" class="nav-link">Python</a></li><li class="dropdown-subitem"><a href="/Git/" class="nav-link">Git</a></li><li class="dropdown-subitem"><a href="/Linux/" class="nav-link">Linux</a></li></ul></li></ul></div></div> <a href="https://github.com/wangjunget/blog-vuepress" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><a href="/Books/Vue.js 组件精讲/" class="sidebar-heading clickable open"><span>Vue.js 组件精讲</span> <span class="arrow down"></span></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/Books/Vue.js 组件精讲/开篇：Vue.js 的精髓——组件.html" class="sidebar-link">开篇：Vue.js 的精髓——组件</a></li><li><a href="/Books/Vue.js 组件精讲/基础：Vue.js 组件的三个 API：prop、event、slot.html" class="sidebar-link">基础：Vue.js 组件的三个 API：prop、event、slot</a></li><li><a href="/Books/Vue.js 组件精讲/组件的通信 1：provide   inject.html" class="sidebar-link">组件的通信 1：provide / inject</a></li><li><a href="/Books/Vue.js 组件精讲/组件的通信 2：派发与广播——自行实现 dispatch 和 broadcast 方法.html" class="sidebar-link">组件的通信 2：派发与广播——自行实现 dispatch 和 broadcast 方法</a></li><li><a href="/Books/Vue.js 组件精讲/实战 1：具有数据校验功能的表单组件——Form.html" class="active sidebar-link">实战 1：具有数据校验功能的表单组件——Form</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Books/Vue.js 组件精讲/实战 1：具有数据校验功能的表单组件——Form.html#form-组件概览" class="sidebar-link">Form 组件概览</a></li><li class="sidebar-sub-header"><a href="/Books/Vue.js 组件精讲/实战 1：具有数据校验功能的表单组件——Form.html#接口设计" class="sidebar-link">接口设计</a></li><li class="sidebar-sub-header"><a href="/Books/Vue.js 组件精讲/实战 1：具有数据校验功能的表单组件——Form.html#在-form-中缓存-formitem-实例" class="sidebar-link">在 Form 中缓存 FormItem 实例</a></li><li class="sidebar-sub-header"><a href="/Books/Vue.js 组件精讲/实战 1：具有数据校验功能的表单组件——Form.html#触发校验" class="sidebar-link">触发校验</a></li><li class="sidebar-sub-header"><a href="/Books/Vue.js 组件精讲/实战 1：具有数据校验功能的表单组件——Form.html#结语" class="sidebar-link">结语</a></li><li class="sidebar-sub-header"><a href="/Books/Vue.js 组件精讲/实战 1：具有数据校验功能的表单组件——Form.html#扩展阅读" class="sidebar-link">扩展阅读</a></li></ul></li><li><a href="/Books/Vue.js 组件精讲/组件的通信 3：找到任意组件实例——findComponents 系列方法.html" class="sidebar-link">组件的通信 3：找到任意组件实例——findComponents 系列方法</a></li><li><a href="/Books/Vue.js 组件精讲/实战 2：组合多选框组件——CheckboxGroup &amp; Checkbox.html" class="sidebar-link">实战 2：组合多选框组件——CheckboxGroup &amp; Checkbox</a></li><li><a href="/Books/Vue.js 组件精讲/Vue 的构造器——extend 与手动挂载——$mount.html" class="sidebar-link">Vue 的构造器——extend 与手动挂载——$mount</a></li><li><a href="/Books/Vue.js 组件精讲/实战 3：动态渲染 .vue 文件的组件—— Display.html" class="sidebar-link">实战 3：动态渲染 .vue 文件的组件—— Display</a></li><li><a href="/Books/Vue.js 组件精讲/实战 4：全局提示组件——$Alert.html" class="sidebar-link">实战 4：全局提示组件——$Alert</a></li><li><a href="/Books/Vue.js 组件精讲/更灵活的组件：Render 函数与 Functional Render.html" class="sidebar-link">更灵活的组件：Render 函数与 Functional Render</a></li><li><a href="/Books/Vue.js 组件精讲/递归组件与动态组件.html" class="sidebar-link">递归组件与动态组件</a></li><li><a href="/Books/Vue.js 组件精讲/实战 7：树形控件——Tree.html" class="sidebar-link">实战 7：树形控件——Tree</a></li><li><a href="/Books/Vue.js 组件精讲/拓展：Vue.js 容易忽略的 API 详解.html" class="sidebar-link">拓展：Vue.js 容易忽略的 API 详解</a></li><li><a href="/Books/Vue.js 组件精讲/拓展：Vue.js 面试、常见问题答疑.html" class="sidebar-link">拓展：Vue.js 面试、常见问题答疑</a></li><li><a href="/Books/Vue.js 组件精讲/拓展：如何做好一个开源项目（上篇）.html" class="sidebar-link">拓展：如何做好一个开源项目（上篇）</a></li><li><a href="/Books/Vue.js 组件精讲/拓展：如何做好一个开源项目（下篇）.html" class="sidebar-link">拓展：如何做好一个开源项目（下篇）</a></li><li><a href="/Books/Vue.js 组件精讲/写在最后.html" class="sidebar-link">写在最后</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="实战-1：具有数据校验功能的表单组件——form"><a href="#实战-1：具有数据校验功能的表单组件——form" aria-hidden="true" class="header-anchor">#</a> 实战 1：具有数据校验功能的表单组件——Form</h1> <p>在第 3 节和第 4 节中，我们介绍了组件间的两种通信方法：provide / inject 和 dispatch / broadcast，前者是 Vue.js 内置的，主要用于子组件获取父组件（包括跨级）的状态；后者是自行实现的一种混合，用于父子组件（包括跨级）间通过自定义事件通信。本小节则基于这两种通信方法，来实现一个具有数据校验功能的表单组件——Form。</p> <h2 id="form-组件概览"><a href="#form-组件概览" aria-hidden="true" class="header-anchor">#</a> Form 组件概览</h2> <p>表单类组件在项目中会大量使用，比如输入框（Input）、单选（Radio）、多选（Checkbox）、下拉选择器（Select）等。在使用表单类组件时，也会经常用到数据校验，如果每次都写校验程序来对每一个表单控件校验，会很低效，因此需要一个能够校验基础表单控件的组件，也就是本节要完成的 Form 组件。一般的组件库都提供了这个组件，比如 iView，它能够校验内置的 15 种控件，且支持校验自定义组件，如下图所示：</p> <p>（也可以在线访问本示例体验：<a href="https://run.iviewui.com/jwrqnFss" target="_blank" rel="noopener noreferrer">https://run.iviewui.com/jwrqnFss<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>）</p> <p><img src="https://user-gold-cdn.xitu.io/2018/10/30/166c3b75c37ef9a8?w=900&amp;h=958&amp;f=gif&amp;s=1820338" alt=""></p> <p>Form 组件分为两个部分，一个是外层的 <code>Form</code> 表单域组件，一组表单控件只有一个 Form，而内部包含了多个 <code>FormItem</code> 组件，每一个表单控件都被一个 FormItem 包裹。基本的结构看起来像：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;i-form&gt;
+  &lt;i-form-item&gt;
+    &lt;i-input v-model=&quot;form.name&quot;&gt;&lt;/i-input&gt;
+  &lt;/i-form-item&gt;
+  &lt;i-form-item&gt;
+    &lt;i-input v-model=&quot;form.mail&quot;&gt;&lt;/i-input&gt;
+  &lt;/i-form-item&gt;
+&lt;/i-form&gt;
+
+</code></pre></div><p>Form 要用到数据校验，并在对应的 FormItem 中给出校验失败的提示，校验我们会用到一个开源库：<a href="https://github.com/yiminghe/async-validator" target="_blank" rel="noopener noreferrer">async-validator<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>，基本主流的组件库都是基于它做的校验。使用它很简单，只需按要求写好一个校验规则就好，比如：</p> <div class="language- extra-class"><pre class="language-text"><code>[
+  { required: true, message: '邮箱不能为空', trigger: 'blur' },
+  { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
+]
+
+</code></pre></div><p>这个代表要校验的数据先判断是否为空（required: true），如果为空，则提示“邮箱不能为空”，触发校验的事件为失焦（trigger: 'blur'），如果第一条满足要求，再进行第二条的验证，判断是否为邮箱格式（type: 'email'）等等，还支持自定义校验规则。更详细的用法可以参看它的文档。</p> <h2 id="接口设计"><a href="#接口设计" aria-hidden="true" class="header-anchor">#</a> 接口设计</h2> <p>我们先使用最新的 Vue CLI 3 创建一个空白的项目（如果你还不清楚 Vue CLI 3 的用法，需要先补习一下了，可以阅读文末的扩展阅读 1），并使用 <code>vue-router</code> 插件，同时安装好 <code>async-validator</code> 库。</p> <p>在 <code>src/components</code> 下新建一个 <code>form</code> 文件夹，并初始化两个组件 <code>form.vue</code> 和 <code>form-item.vue</code>，然后初始化项目，配置路由，创建一个页面能够被访问到。</p> <blockquote><p>本节所有代码可以在 <a href="https://github.com/icarusion/vue-component-book" target="_blank" rel="noopener noreferrer">https://github.com/icarusion/vue-component-book<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 中查看，你可以一边看源码，一边阅读本节；也可以边阅读，边动手实现一遍，遇到问题再参考完整的源码。</p></blockquote> <p>第 2 节我们介绍到，编写一个 Vue.js 组件，最重要的是设计好它的接口，一个 Vue.js 组件的接口来自三个部分：props、slots、events。而 Form 和 FormItem 两个组件主要做数据校验，用不到 events。Form 的 slot 就是一系列的 FormItem，FormItem 的 slot 就是具体的表单控件，比如输入框 <code>&lt;i-input&gt;</code> 。那主要设计的就是 props 了。</p> <p>在 <code>Form</code> 组件中，定义两个 props：</p> <ul><li>model：表单控件绑定的数据对象，在校验或重置时会访问该数据对象下对应的表单数据，类型为 Object。</li> <li>rules：表单验证规则，即上面介绍的 async-validator 所使用的校验规则，类型为 Object。</li></ul> <p>在 <code>FormItem</code> 组件中，也定义两个 props：</p> <ul><li>label：单个表单组件的标签文本，类似原生的 <code>&lt;label&gt;</code> 元素，类型为 String。</li> <li>prop：对应表单域 Form 组件 model 里的字段，用于在校验或重置时访问表单组件绑定的数据，类型为 String。</li></ul> <p>定义好 props，就可以写出大概的用例了：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;i-form :model=&quot;formValidate&quot; :rules=&quot;ruleValidate&quot;&gt;
+      &lt;i-form-item label=&quot;用户名&quot; prop=&quot;name&quot;&gt;
+        &lt;i-input v-model=&quot;formValidate.name&quot;&gt;&lt;/i-input&gt;
+      &lt;/i-form-item&gt;
+      &lt;i-form-item label=&quot;邮箱&quot; prop=&quot;mail&quot;&gt;
+        &lt;i-input v-model=&quot;formValidate.mail&quot;&gt;&lt;/i-input&gt;
+      &lt;/i-form-item&gt;
+    &lt;/i-form&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  import iForm from '../components/form/form.vue';
+  import iFormItem from '../components/form/form-item.vue';
+  import iInput from '../components/input/input.vue';
+
+  export default {
+    components: { iForm, iFormItem, iInput },
+    data () {
+      return {
+        formValidate: {
+          name: '',
+          mail: ''
+        },
+        ruleValidate: {
+          name: [
+            { required: true, message: '用户名不能为空', trigger: 'blur' }
+          ],
+          mail: [
+            { required: true, message: '邮箱不能为空', trigger: 'blur' },
+            { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
+          ],
+        }
+      }
+    }
+  }
+&lt;/script&gt;
+
+</code></pre></div><p>有两点需要注意的是：</p> <ol><li>这里的 <code>&lt;i-input&gt;</code> 并不是原生的 <code>&lt;input&gt;</code> 输入框，而是一个特制的输入框组件，之后会介讲解的功能和代码；</li> <li><code>&lt;i-form-item&gt;</code> 的属性 <code>prop</code> 是字符串，所以它前面没有冒号（即不是 <code>:prop=&quot;name&quot;</code>）。</li></ol> <p>当前的两个组件只是个框框，还没有实现任何功能，不过万事开头难，定义好接口，剩下的就是补全组件的逻辑，而对于使用者，知道了 props、events、slots，就已经能写出上例的使用代码了。</p> <p>到此，Form 和 FormItem 的代码如下：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;!-- form.vue --&gt;
+&lt;template&gt;
+  &lt;form&gt;
+    &lt;slot&gt;&lt;/slot&gt;
+  &lt;/form&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    name: 'iForm',
+    props: {
+      model: {
+        type: Object
+      },
+      rules: {
+        type: Object
+      }
+    }
+  }
+&lt;/script&gt;
+
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>&lt;!-- form-item.vue --&gt;
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;label v-if=&quot;label&quot;&gt;{{ label }}&lt;/label&gt;
+    &lt;div&gt;
+      &lt;slot&gt;&lt;/slot&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    name: 'iFormItem',
+    props: {
+      label: {
+        type: String,
+        default: ''
+      },
+      prop: {
+        type: String
+      }
+    }
+  }
+&lt;/script&gt;
+
+</code></pre></div><h2 id="在-form-中缓存-formitem-实例"><a href="#在-form-中缓存-formitem-实例" aria-hidden="true" class="header-anchor">#</a> 在 Form 中缓存 FormItem 实例</h2> <p><code>Form</code> 组件的核心功能是数据校验，一个 Form 中包含了多个 FormItem，当点击提交按钮时，要逐一对每个 FormItem 内的表单组件校验，而校验是由使用者发起，并通过 <code>Form</code> 来调用每一个 <code>FormItem</code> 的验证方法，再将校验结果汇总后，通过 <code>Form</code> 返回出去。大致的流程如下图所示：</p> <p><img src="https://user-gold-cdn.xitu.io/2018/10/30/166c3b7f124cb84a?w=1046&amp;h=610&amp;f=png&amp;s=42610" alt=""></p> <p>因为要在 Form 中逐一调用 FormItem 的验证方法，而 Form 和 FormItem 是独立的，需要预先将 FormItem 的每个实例缓存在 Form 中，这个操作就需要用到第 4 节的组件通信方法。当每个 FormItem 渲染时，将其自身（this）作为参数通过 <code>dispatch</code> 派发到 Form 组件中，然后通过一个数组缓存起来；同理当 FormItem 销毁时，将其从 Form 缓存的数组中移除。相关代码如下：</p> <div class="language- extra-class"><pre class="language-text"><code>// form-item.vue，部分代码省略
+
+import Emitter from '../../mixins/emitter.js';
+
+export default {
+  name: 'iFormItem',
+  mixins: [ Emitter ],
+  // 组件渲染时，将实例缓存在 Form 中
+  mounted () {
+    // 如果没有传入 prop，则无需校验，也就无需缓存
+    if (this.prop) {
+      this.dispatch('iForm', 'on-form-item-add', this);
+    }
+  },
+  // 组件销毁前，将实例从 Form 的缓存中移除
+  beforeDestroy () {
+    this.dispatch('iForm', 'on-form-item-remove', this);
+  }
+}
+
+</code></pre></div><p>注意，Vue.js 的组件渲染顺序是由内而外的，所以 FormItem 要先于 Form 渲染，在 FormItem 的 mounted 触发时，我们向 Form 派发了事件 <code>on-form-item-add</code>，并将当前 FormItem 的实例（this）传递给了 Form，而此时，Form 的 mounted 尚未触发，因为 Form 在最外层，如果在 Form 的 mounted 里监听事件，是不可以的，所以要在其 created 内监听自定义事件，Form 的 created 要先于 FormItem 的 mounted。所以 Form 的相关代码为：</p> <div class="language- extra-class"><pre class="language-text"><code>// form.vue，部分代码省略
+export default {
+  name: 'iForm',
+  data () {
+    return {
+      fields: []
+    };
+  },
+  created () {
+    this.$on('on-form-item-add', (field) =&gt; {
+      if (field) this.fields.push(field);
+    });
+    this.$on('on-form-item-remove', (field) =&gt; {
+      if (field.prop) this.fields.splice(this.fields.indexOf(field), 1);
+    });
+  }
+}
+
+</code></pre></div><p>定义的数据 <code>fields</code> 就是用来缓存所有 FormItem 实例的。</p> <h2 id="触发校验"><a href="#触发校验" aria-hidden="true" class="header-anchor">#</a> 触发校验</h2> <p>Form 支持两种事件来触发校验：</p> <ul><li><strong>blur</strong>：失去焦点时触发，常见的有输入框失去焦点时触发校验；</li> <li><strong>change</strong>：实时输入时触发或选择时触发，常见的有输入框实时输入时触发校验、下拉选择器选择项目时触发校验等。</li></ul> <p>以上两个事件，都是有具体的表单组件来触发的，我们先来编写一个简单的输入框组件 <code>i-input</code>。在 <code>components</code> 下新建目录 <code>input</code>，并创建文件 <code>input.vue</code>：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;!-- input.vue --&gt;
+&lt;template&gt;
+  &lt;input
+         type=&quot;text&quot;
+         :value=&quot;currentValue&quot;
+         @input=&quot;handleInput&quot;
+         @blur=&quot;handleBlur&quot;
+         /&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  import Emitter from '../../mixins/emitter.js';
+
+  export default {
+    name: 'iInput',
+    mixins: [ Emitter ],
+    props: {
+      value: {
+        type: String,
+        default: ''
+      },
+    },
+    data () {
+      return {
+        currentValue: this.value
+      }
+    },
+    watch: {
+      value (val) {
+        this.currentValue = val;
+      }
+    },
+    methods: {
+      handleInput (event) {
+        const value = event.target.value;
+        this.currentValue = value;
+        this.$emit('input', value);
+        this.dispatch('iFormItem', 'on-form-change', value);
+      },
+      handleBlur () {
+        this.dispatch('iFormItem', 'on-form-blur', this.currentValue);
+      }
+    }
+  }
+&lt;/script&gt;
+
+</code></pre></div><p>Input 组件中，绑定在 <code>&lt;input&gt;</code> 元素上的原生事件 <code>@input</code>，每当输入一个字符，都会调用句柄 <code>handleInput</code>，并通过 <code>dispatch</code> 方法向上级的 FormItem 组件派发自定义事件 <code>on-form-change</code>；同理，绑定的原生事件 <code>@blur</code> 会在 input 失焦时触发，并传递事件 <code>on-form-blur</code>。</p> <p>基础组件有了，接下来要做的，是在 FormItem 中监听来自 Input 组件派发的自定义事件。这里可以在 mounted 中监听，因为你的手速远赶不上组件渲染的速度，不过在 created 中监听也是没任何问题的。相关代码如下：</p> <div class="language- extra-class"><pre class="language-text"><code>// form-item.vue，部分代码省略
+export default {
+  methods: {
+    setRules () {
+      this.$on('on-form-blur', this.onFieldBlur);
+      this.$on('on-form-change', this.onFieldChange);
+    },
+  },
+  mounted () {
+    if (this.prop) {
+      this.dispatch('iForm', 'on-form-item-add', this);
+      this.setRules();
+    }
+  }
+}
+
+</code></pre></div><p>通过调用 <code>setRules</code> 方法，监听表单组件的两个事件，并绑定了句柄函数 <code>onFieldBlur</code> 和 <code>onFieldChange</code>，分别对应 blur 和 change 两种事件类型。当 onFieldBlur 或 onFieldChange 函数触发时，就意味着 FormItem 要对<strong>当前的数据</strong>进行一次校验。当前的数据，指的就是通过表单域 Form 中定义的 props：model，结合当前 FormItem 定义的 props：prop 来确定的数据，可以回顾上文写过的用例。</p> <p>因为 FormItem 中只定义了数据源的某个 key 名称（即属性 prop），要拿到 Form 中 model 里的数据，需要用到第 3 节的通信方法 provide / inject。所以在 Form 中，把整个实例（this）向下提供，并在 FormItem 中注入：</p> <div class="language- extra-class"><pre class="language-text"><code>// form.vue，部分代码省略
+export default {
+  provide() {
+    return {
+      form : this
+    };
+  }
+}
+
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>// form-item.vue，部分代码省略
+export default {
+  inject: ['form']
+}
+
+</code></pre></div><p>准备好这些，接着就是最核心的校验功能了。blur 和 change 事件都会触发校验，它们调用同一个方法，只是参数不同。相关代码如下：</p> <div class="language- extra-class"><pre class="language-text"><code>// form-item.vue，部分代码省略
+import AsyncValidator from 'async-validator';
+
+export default {
+  inject: ['form'],
+  props: {
+    prop: {
+      type: String
+    },
+  },
+  data () {
+    return {
+      validateState: '',  // 校验状态
+      validateMessage: '',  // 校验不通过时的提示信息
+    }
+  },
+  computed: {
+    // 从 Form 的 model 中动态得到当前表单组件的数据
+    fieldValue () {
+      return this.form.model[this.prop];
+    }
+  },
+  methods: {
+    // 从 Form 的 rules 属性中，获取当前 FormItem 的校验规则
+    getRules () {
+      let formRules = this.form.rules;
+
+      formRules = formRules ? formRules[this.prop] : [];
+
+      return [].concat(formRules || []);
+    },
+    // 只支持 blur 和 change，所以过滤出符合要求的 rule 规则
+    getFilteredRule (trigger) {
+      const rules = this.getRules();
+      return rules.filter(rule =&gt; !rule.trigger || rule.trigger.indexOf(trigger) !== -1);
+    },
+    /**
+     * 校验数据
+     * @param trigger 校验类型
+     * @param callback 回调函数
+     */
+    validate(trigger, callback = function () {}) {
+      let rules = this.getFilteredRule(trigger);
+
+      if (!rules || rules.length === 0) {
+        return true;
+      }
+
+      // 设置状态为校验中
+      this.validateState = 'validating';
+
+      // 以下为 async-validator 库的调用方法
+      let descriptor = {};
+      descriptor[this.prop] = rules;
+
+      const validator = new AsyncValidator(descriptor);
+      let model = {};
+
+      model[this.prop] = this.fieldValue;
+
+      validator.validate(model, { firstFields: true }, errors =&gt; {
+        this.validateState = !errors ? 'success' : 'error';
+        this.validateMessage = errors ? errors[0].message : '';
+
+        callback(this.validateMessage);
+      });
+    },
+    onFieldBlur() {
+      this.validate('blur');
+    },
+    onFieldChange() {
+      this.validate('change');
+    }
+  }
+}
+
+</code></pre></div><p>在 FormItem 的 <code>validate()</code> 方法中，最终做了两件事：</p> <ol><li>设置了当前的校验状态 <code>validateState</code> 和校验不通过提示信息 <code>validateMessage</code>（通过值为空）；</li> <li>将 validateMessage 通过回调 callback 传递给调用者，这里的调用者是 onFieldBlur 和 onFieldChange，它们只传入了第一个参数 <code>trigger</code>，callback 并未传入，因此也不会触发回调，而这个回调主要是给 Form 用的，因为 Form 中可以通过提交按钮一次性校验所有的 FormItem（后文会介绍）这里只是表单组件触发事件时，对当前 FormItem 做校验。</li></ol> <p>除了校验，还可以对当前数据进行重置。重置是指将表单组件的数据还原到最初绑定的值，而不是清空，因此需要预先缓存一份初始值。同时我们将校验信息也显示在模板中，并加一些样式。相关代码如下：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;!-- form-item.vue，部分代码省略 --&gt;
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;label v-if=&quot;label&quot; :class=&quot;{ 'i-form-item-label-required': isRequired }&quot;&gt;{{ label }}&lt;/label&gt;
+    &lt;div&gt;
+      &lt;slot&gt;&lt;/slot&gt;
+      &lt;div v-if=&quot;validateState === 'error'&quot; class=&quot;i-form-item-message&quot;&gt;{{ validateMessage }}&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    props: {
+      label: {
+        type: String,
+        default: ''
+      },
+      prop: {
+        type: String
+      },
+    },
+    data () {
+      return {
+        isRequired: false,  // 是否为必填
+        validateState: '',  // 校验状态
+        validateMessage: '',  // 校验不通过时的提示信息
+      }
+    },
+    mounted () {
+      // 如果没有传入 prop，则无需校验，也就无需缓存
+      if (this.prop) {
+        this.dispatch('iForm', 'on-form-item-add', this);
+
+        // 设置初始值，以便在重置时恢复默认值
+        this.initialValue = this.fieldValue;
+
+        this.setRules();
+      }
+    },
+    methods: {
+      setRules () {
+        let rules = this.getRules();
+        if (rules.length) {
+          rules.every((rule) =&gt; {
+            // 如果当前校验规则中有必填项，则标记出来
+            this.isRequired = rule.required;
+          });
+        }
+
+        this.$on('on-form-blur', this.onFieldBlur);
+        this.$on('on-form-change', this.onFieldChange);
+      },
+      // 从 Form 的 rules 属性中，获取当前 FormItem 的校验规则
+      getRules () {
+        let formRules = this.form.rules;
+
+        formRules = formRules ? formRules[this.prop] : [];
+
+        return [].concat(formRules || []);
+      },
+      // 重置数据
+      resetField () {
+        this.validateState = '';
+        this.validateMessage = '';
+
+        this.form.model[this.prop] = this.initialValue;
+      },
+    }
+  }
+&lt;/script&gt;
+&lt;style&gt;
+  .i-form-item-label-required:before {
+    content: '*';
+    color: red;
+  }
+  .i-form-item-message {
+    color: red;
+  }
+&lt;/style&gt;
+
+</code></pre></div><p>至此，FormItem 代码已经完成，不过它只具有单独校验的功能，也就是说，只能对自己的一个表单组件验证，不能对一个表单域里的所有组件一次性全部校验。而实现全部校验和全部重置的功能，要在 Form 中完成。</p> <p>上文已经介绍到，在 <code>Form</code> 组件中，预先缓存了全部的 FormItem 实例，自然也能在 Form 中调用它们。通过点击提交按钮全部校验，或点击重置按钮全部重置数据，只需要在 Form 中，逐一调用缓存的 FormItem 实例中的 <code>validate</code> 或 <code>resetField</code> 方法。相关代码如下：</p> <div class="language- extra-class"><pre class="language-text"><code>// form.vue，部分代码省略
+export default {
+  data () {
+    return {
+      fields: []
+    };
+  },
+  methods: {
+    // 公开方法：全部重置数据
+    resetFields() {
+      this.fields.forEach(field =&gt; {
+        field.resetField();
+      });
+    },
+    // 公开方法：全部校验数据，支持 Promise
+    validate(callback) {
+      return new Promise(resolve =&gt; {
+        let valid = true;
+        let count = 0;
+        this.fields.forEach(field =&gt; {
+          field.validate('', errors =&gt; {
+            if (errors) {
+              valid = false;
+            }
+            if (++count === this.fields.length) {
+              // 全部完成
+              resolve(valid);
+              if (typeof callback === 'function') {
+                callback(valid);
+              }
+            }
+          });
+        });
+      });
+    }
+  },
+}
+
+</code></pre></div><p>虽然说 Vue.js 的 API 只来自 prop、event、slot 这三个部分，但一些场景下，需要通过 <code>ref</code> 来访问这个组件，调用它的一些内置方法，比如上面的 <code>validate</code> 和 <code>resetFields</code> 方法，就需要使用者来主动调用。</p> <p>resetFields 很简单，就是通过循环逐一调用 FormItem 的 resetField 方法来重置数据。validate 稍显复杂，它支持两种使用方法，一种是普通的回调，比如：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;i-form ref=&quot;form&quot;&gt;&lt;/i-form&gt;
+    &lt;button @click=&quot;handleSubmit&quot;&gt;提交&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    methods: {
+      handleSubmit () {
+        this.$refs.form.validate((valid) =&gt; {
+          if (valid) {
+            window.alert('提交成功');
+          } else {
+            window.alert('表单校验失败');
+          }
+        })
+      }
+    }
+  }
+&lt;/script&gt;
+
+</code></pre></div><p>同时也支持 Promise，例如：</p> <div class="language- extra-class"><pre class="language-text"><code>handleSubmit () {
+  const validate = this.$refs.form.validate();
+  
+  validate.then((valid) =&gt; {
+    if (valid) {
+      window.alert('提交成功');
+    } else {
+      window.alert('表单校验失败');
+    }
+  })
+}
+
+</code></pre></div><p>在 Form 组件定义的 Promise 中，只调用了 resolve(valid)，没有调用 reject()，因此不能直接使用 <code>.catch()</code> ，不过聪明的你稍作修改，肯定能够支持到！</p> <p>完整的用例如下：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;h3&gt;具有数据校验功能的表单组件——Form&lt;/h3&gt;
+    &lt;i-form ref=&quot;form&quot; :model=&quot;formValidate&quot; :rules=&quot;ruleValidate&quot;&gt;
+      &lt;i-form-item label=&quot;用户名&quot; prop=&quot;name&quot;&gt;
+        &lt;i-input v-model=&quot;formValidate.name&quot;&gt;&lt;/i-input&gt;
+      &lt;/i-form-item&gt;
+      &lt;i-form-item label=&quot;邮箱&quot; prop=&quot;mail&quot;&gt;
+        &lt;i-input v-model=&quot;formValidate.mail&quot;&gt;&lt;/i-input&gt;
+      &lt;/i-form-item&gt;
+    &lt;/i-form&gt;
+    &lt;button @click=&quot;handleSubmit&quot;&gt;提交&lt;/button&gt;
+    &lt;button @click=&quot;handleReset&quot;&gt;重置&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  import iForm from '../components/form/form.vue';
+  import iFormItem from '../components/form/form-item.vue';
+  import iInput from '../components/input/input.vue';
+
+  export default {
+    components: { iForm, iFormItem, iInput },
+    data () {
+      return {
+        formValidate: {
+          name: '',
+          mail: ''
+        },
+        ruleValidate: {
+          name: [
+            { required: true, message: '用户名不能为空', trigger: 'blur' }
+          ],
+          mail: [
+            { required: true, message: '邮箱不能为空', trigger: 'blur' },
+            { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
+          ],
+        }
+      }
+    },
+    methods: {
+      handleSubmit () {
+        this.$refs.form.validate((valid) =&gt; {
+          if (valid) {
+            window.alert('提交成功');
+          } else {
+            window.alert('表单校验失败');
+          }
+        })
+      },
+      handleReset () {
+        this.$refs.form.resetFields();
+      }
+    }
+  }
+&lt;/script&gt;
+
+</code></pre></div><p>运行效果：</p> <p><img src="https://user-gold-cdn.xitu.io/2018/10/30/166c3b8a77e382ec?w=1417&amp;h=550&amp;f=png&amp;s=60805" alt=""></p> <p>完整的示例源码可通过 GitHub 查看：</p> <p><a href="https://github.com/icarusion/vue-component-book" target="_blank" rel="noopener noreferrer">https://github.com/icarusion/vue-component-book<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <blockquote><p>项目基于 Vue CLI 3 构建，下载安装依赖后，通过 npm run serve 可访问。</p></blockquote> <h2 id="结语"><a href="#结语" aria-hidden="true" class="header-anchor">#</a> 结语</h2> <p>组件最终的效果看起来有点 “low”，但它实现的功能却不简单。通过这个实战，你或许已经感受到本小册一开始说的，组件写到最后，都是在拼 JavaScript 功底。的确，Vue.js 组件为我们提供了一种新的代码组织形式，但归根到底，是离不开 JS 的。</p> <p>这个实战，你应该对独立组件间的通信用法有进一步的认知了吧，不过，这还不是组件通信的终极方案，下一节，我们就来看看适用于任何场景的组件通信方案。</p> <p>注：本节部分代码参考 <a href="https://github.com/iview/iview/tree/2.0/src/components/form" target="_blank" rel="noopener noreferrer">iView<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>。</p> <h2 id="扩展阅读"><a href="#扩展阅读" aria-hidden="true" class="header-anchor">#</a> 扩展阅读</h2> <ul><li><a href="https://juejin.im/post/5bdec6e8e51d4505327a8952" target="_blank" rel="noopener noreferrer">一份超级详细的Vue-cli3.0使用教程<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/Books/Vue.js 组件精讲/组件的通信 2：派发与广播——自行实现 dispatch 和 broadcast 方法.html" class="prev">组件的通信 2：派发与广播——自行实现 dispatch 和 broadcast 方法</a></span> <span class="next"><a href="/Books/Vue.js 组件精讲/组件的通信 3：找到任意组件实例——findComponents 系列方法.html">组件的通信 3：找到任意组件实例——findComponents 系列方法</a>→
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.9ff94b6f.js" defer></script><script src="/assets/js/3.49a4f85b.js" defer></script><script src="/assets/js/20.57228dc9.js" defer></script>
+  </body>
+</html>
