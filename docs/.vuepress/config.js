@@ -92,8 +92,12 @@ module.exports = {
                 {
                     title: 'Css',
                     collapsable: false,
+                    // path: '/Css/',
                     children: [
-                        ['/Css/', '关于']
+                        ['/Css/', '关于'],
+                        '/Css/文本截断汇总',
+                        ['/Css/animation', 'animation']
+    
                     ]
                 }
             ],
@@ -123,8 +127,8 @@ module.exports = {
                         '/Books/Vue.js 组件精讲/实战 3：动态渲染 .vue 文件的组件—— Display',
                         '/Books/Vue.js 组件精讲/实战 4：全局提示组件——$Alert',
                         '/Books/Vue.js 组件精讲/更灵活的组件：Render 函数与 Functional Render',
-                        '/Books/Vue.js 组件精讲/实战 5：可用 Render 自定义列的表格组件——Table',
-                        '/Books/Vue.js 组件精讲/实战 6：可用 slot-scope 自定义列的表格组件——Table',
+                        // '/Books/Vue.js 组件精讲/实战 5：可用 Render 自定义列的表格组件——Table',
+                        // '/Books/Vue.js 组件精讲/实战 6：可用 slot-scope 自定义列的表格组件——Table',
                         '/Books/Vue.js 组件精讲/递归组件与动态组件',
                         '/Books/Vue.js 组件精讲/实战 7：树形控件——Tree',
                         '/Books/Vue.js 组件精讲/拓展：Vue.js 容易忽略的 API 详解',

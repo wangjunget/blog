@@ -1,6 +1,6 @@
 <template>
     <div class="home-container">
-        <div id="statistics"></div>
+          <div id="statistics"></div>
     </div>
 </template>
 
@@ -13,7 +13,7 @@ require('echarts/lib/component/legend')
 
 
 export default {
-    name: 'Home-Statistics',
+      name: 'Home-Statistics',
     data() {
         return {
             
