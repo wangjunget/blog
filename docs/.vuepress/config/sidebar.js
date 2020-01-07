@@ -2,87 +2,54 @@ const fs = require('fs-extra')
 const path = require('path')
 
 module.exports = {
-  '/Vue/': [
-    {
-      title: 'Vue',
-      collapsable: false,
-      children: [['/Vue/', '关于']]
-    }
-  ],
-  '/Python/': [
-    {
-      title: 'Python',
-      collapsable: false,
-      children: [
-        ['/Python/', '关于'],
-        '/Python/深入理解Python中的元类',
-        '/Python/Python单例模式'
-      ]
-    }
-  ],
-  
-  '/Git/': [
-    {
-      title: 'Git',
-      collapsable: false,
-      children: [['/Git/', '关于']]
-    }
-  ],
-  '/Css/': [
-    {
-      title: 'Css',
-      collapsable: false,
-      // path: '/Css/',
-      children: [
-        ['/Css/', '关于'],
-        '/Css/文本截断汇总',
-        ['/Css/animation', 'animation'],
-        ['/Css/transition', 'transition']
-      ]
-    }
-  ],
-  '/Linux/': [
-    {
-      title: 'Linux',
-      collapsable: false,
-      children: [['/Linux/', '关于']]
-    }
-  ],
-  '/Books/': getBookSidebar(),
-  '/JavaScript/': getJsSidebar()
+  '/Vue/':getSidebarContent('Vue'),
+  '/Python/': getSidebarContent('Python'),
+  '/Git/': getSidebarContent('Git'),
+  '/Css/': getSidebarContent('Css'),
+  '/Linux/': getSidebarContent('Linux'),
+  '/Books/': getSidebarContent('Books'),
+  '/JavaScript/': getSidebarContent('JavaScript'),
+  '/Test/': getSidebarContent('Test')
 }
 
-function getSubDirContent(category, subDirname) {
-  const absolutePath = subDirname ? `${category}/${subDirname}` : category
-  return fs.readdirSync(path.resolve(__dirname, `../../${absolutePath}`))
-  .map(filename => {
-    return (subDirname ? `${subDirname}/` : '') + filename.split(0, -3)
+function getSidebarContent(category) {
+  /**
+   * @param category 文章分类
+   */
+  const sidebarContent = []
+  const rootPath = path.resolve(__dirname, `../../${category}`)
+  registerSideBar(sidebarContent, rootPath, `/${category}`)
+  return sidebarContent
+}
+
+function registerSideBar(list, currentDir, parentRoute) {
+  /**
+   * @param list 路径存放数组
+   * @param currentDir 当前文件夹
+   * @param parentRoute 父级路由绝对路径
+   */
+  fs.readdirSync(currentDir).map(item => {
+    const stat = fs.statSync(path.resolve(currentDir, item))
+    if (stat && stat.isDirectory()) {
+      const group = {
+        title: item,
+        collapsable: true,
+        children: []
+      }
+      list.push(group)
+      registerSideBar(group.children, path.resolve(currentDir, item), `${parentRoute}/${item}`)
+      group.path = group.children.length === 0 ? '' : group.children[0][0] // 重定向到第一个文件路径
+    } else {
+      const homePage = ['index.md', 'INDEX.md', 'README.md']
+      if (homePage.indexOf(item) > -1) {
+        list.unshift(['', '概览']) // 概览添加到顶部
+      } else {
+        list.push([`${parentRoute}/${item}`.slice(0, -3), item.slice(0, -3)])
+      }
+    }
   })
 }
 
-function getJsSidebar() {
-  return [
-    ['', '概览'],
-    {
-      title: '数组',
-      collapsable: true,
-      children: getSubDirContent('JavaScript', 'Array')
-    },
-    {
-      title: 'Es6',
-      collapsable: true,
-      children: getSubDirContent('JavaScript', 'es6')
-    }
-  ]
-}
+function sortRoute(route) {
 
-function getBookSidebar() {
-  return [
-    ['', '概览'],
-    {
-      title: 'Vue.js组件精讲',
-      collapsable: true,
-      children: getSubDirContent('Books', 'Vue.js组件精讲')
-    }
-  ]
 }

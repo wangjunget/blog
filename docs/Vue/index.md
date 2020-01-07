@@ -3,4 +3,4 @@ title: Vue
 next: false
 ---
 
-![Vue](./static/image/vue-index.png)
+<!-- ![Vue](./static/image/vue-index.png) -->
