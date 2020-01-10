@@ -30,7 +30,7 @@ module.exports = {
           {
             text: '前端',
             items: [
-              { text: 'Vue', link: '/Vue/' },
+              { text: 'Html', link: '/Html/' },
               { text: 'JavaScript', link: '/JavaScript/' },
               { text: 'Css', link: '/Css/' }
             ]

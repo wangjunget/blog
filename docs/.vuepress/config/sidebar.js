@@ -9,6 +9,7 @@ module.exports = {
   '/Linux/': getSidebarContent('Linux'),
   '/Books/': getSidebarContent('Books'),
   '/JavaScript/': getSidebarContent('JavaScript'),
+  '/Html/': getSidebarContent('Html'),
   '/Test/': getSidebarContent('Test')
 }
 
@@ -38,7 +39,6 @@ function registerSideBar(list, currentDir, parentRoute) {
       }
       list.push(group)
       registerSideBar(group.children, path.resolve(currentDir, item), `${parentRoute}/${item}`)
-      group.path = group.children.length === 0 ? '' : group.children[0][0] // 重定向到第一个文件路径
     } else {
       const homePage = ['index.md', 'INDEX.md', 'README.md']
       if (homePage.indexOf(item) > -1) {
