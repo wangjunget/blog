@@ -14,7 +14,15 @@ module.exports = {
         }
       }
     ],
-    ['@vuepress/back-to-top']
+    ['@vuepress/back-to-top'],
+    [
+      'vuepress-plugin-container',
+      {
+        type: 'css',
+        before: info => `<div class="theorem"><p class="title">${info}</p>`,
+        after: '</div>',
+      }
+    ]
   ],
   themeConfig: {
     repo: 'wangjunget/blog-vuepress',
