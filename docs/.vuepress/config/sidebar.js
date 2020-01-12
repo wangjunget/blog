@@ -2,7 +2,7 @@ const fs = require('fs-extra')
 const path = require('path')
 
 module.exports = {
-  '/Vue/':getSidebarContent('Vue'),
+  '/Vue/': getSidebarContent('Vue'),
   '/Python/': getSidebarContent('Python'),
   '/Git/': getSidebarContent('Git'),
   '/Css/': getSidebarContent('Css'),
@@ -19,7 +19,9 @@ function getSidebarContent(category) {
    */
   const sidebarContent = []
   const rootPath = path.resolve(__dirname, `../../${category}`)
-  registerSideBar(sidebarContent, rootPath, `/${category}`)
+  if (fs.existsSync(rootPath)) {
+    registerSideBar(sidebarContent, rootPath, `/${category}`)
+  }
   return sidebarContent
 }
 
@@ -38,7 +40,11 @@ function registerSideBar(list, currentDir, parentRoute) {
         children: []
       }
       list.push(group)
-      registerSideBar(group.children, path.resolve(currentDir, item), `${parentRoute}/${item}`)
+      registerSideBar(
+        group.children,
+        path.resolve(currentDir, item),
+        `${parentRoute}/${item}`
+      )
     } else {
       const homePage = ['index.md', 'INDEX.md', 'README.md']
       if (homePage.indexOf(item) > -1) {
@@ -50,6 +56,4 @@ function registerSideBar(list, currentDir, parentRoute) {
   })
 }
 
-function sortRoute(route) {
-
-}
+function sortRoute(route) {}
