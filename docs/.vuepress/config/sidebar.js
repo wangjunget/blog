@@ -10,6 +10,7 @@ module.exports = {
   '/Books/': getSidebarContent('Books'),
   '/JavaScript/': getSidebarContent('JavaScript'),
   '/Html/': getSidebarContent('Html'),
+  '/Docker/': getSidebarContent('Docker'),
   '/Test/': getSidebarContent('Test')
 }
 
@@ -19,7 +20,7 @@ function getSidebarContent(category) {
    */
   const sidebarContent = []
   const rootPath = path.resolve(__dirname, `../../${category}`)
-  if (fs.existsSync(rootPath)) {
+  if (fs.existsSync(rootPath)) { // 判断文件夹是否为空
     registerSideBar(sidebarContent, rootPath, `/${category}`)
   }
   return sidebarContent
@@ -47,7 +48,7 @@ function registerSideBar(list, currentDir, parentRoute) {
       )
     } else {
       const homePage = ['index.md', 'INDEX.md', 'README.md']
-      const whiteList = ['.DS_Store']
+      const whiteList = ['.DS_Store'] // 忽略文件
       if (homePage.indexOf(item) > -1) {
         list.unshift(['', '概览']) // 概览添加到顶部
       } else if (whiteList.indexOf(item) === -1) {
