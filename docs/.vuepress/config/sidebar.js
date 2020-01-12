@@ -47,9 +47,10 @@ function registerSideBar(list, currentDir, parentRoute) {
       )
     } else {
       const homePage = ['index.md', 'INDEX.md', 'README.md']
+      const whiteList = ['.DS_Store']
       if (homePage.indexOf(item) > -1) {
         list.unshift(['', '概览']) // 概览添加到顶部
-      } else {
+      } else if (whiteList.indexOf(item) === -1) {
         list.push([`${parentRoute}/${item}`.slice(0, -3), item.slice(0, -3)])
       }
     }
