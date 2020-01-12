@@ -1,4 +1,4 @@
-const sidebarConfig = require('./config/sideBar')
+const sidebarConfig = require('./config/sidebar')
 
 module.exports = {
   title: 'wangjunget',
