@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[12],{401:function(e,n,t){"use strict";t.r(n);var s={},l=t(0),a=Object(l.a)(s,(function(){var e=this.$createElement;return(this._self._c||e)("div",{staticClass:"category-container"},[this._v("\n    hello vuepress\n")])}),[],!1,null,null,null);n.default=a.exports}}]);
