@@ -15,3 +15,4 @@ console.log('你好，VuePress！')
 ```js
 console.log('hello world)
 :::
+
