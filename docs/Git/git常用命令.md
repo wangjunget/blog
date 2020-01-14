@@ -65,5 +65,15 @@ git config --global user.email xxxx
 
 ```[-m, --message]```添加提交信息。
 
+### git reset
+
+**描述**：重置HEAD到指定的状态。分为三种形式。
+
+```git reset [-q] [<tree-ish>] [--] <paths>```
+
+**选项**：
+
+
+
 
 
