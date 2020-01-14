@@ -7,5 +7,12 @@ install:
   - npm install
 script:
   - vuepress build docs
+deploy:
+  provider: pages
+  github-token: $GITHUB_TOKEN
+  traget-branch: gh-pages
+  verbose: true
+  on:
+    branch: master
 after_success:
   - echo success
