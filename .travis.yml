@@ -11,6 +11,7 @@ deploy:
   provider: pages
   github-token: $GITHUB_TOKEN
   traget-branch: gh-pages
+  local-dir: ./docs/.vuepress/dist
   verbose: true
   on:
     branch: master
