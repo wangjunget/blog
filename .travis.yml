@@ -1,5 +1,9 @@
 language: node_js
-node_js: - "12"
+node_js: - 12
+before_install: 
+  - npm install -g vuepress
+install:
+  - npm install
 script:
   - vuepress build docs
 after_success:
