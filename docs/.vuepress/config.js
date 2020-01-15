@@ -1,6 +1,7 @@
 const sidebarConfig = require('./config/sidebar')
 
 module.exports = {
+  base: './',
   title: 'wangjunget',
   plugins: [
     [
