@@ -9,6 +9,7 @@ script:
   - vuepress build docs
 deploy:
   provider: pages
+  skip_cleanup: true
   github-token: $GITHUB_TOKEN
   local-dir: ./docs/.vuepress/dist
   traget-branch: gh-pages
