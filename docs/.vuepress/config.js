@@ -1,7 +1,7 @@
 const sidebarConfig = require('./config/sidebar')
 
 module.exports = {
-  base: '/blog-vuepress',
+  base: '/blog-vuepress/',
   title: 'wangjunget',
   plugins: [
     [
@@ -32,23 +32,23 @@ module.exports = {
     // lastUpdated: '最近更新',
     head: [['link', { rel: 'icon', href: './public/favicon.ico' }]],
     nav: [
-      { text: '主页', link: './' },
+      { text: '主页', link: '/' },
       {
         text: '分类',
         items: [
           {
             text: '前端',
             items: [
-              { text: 'Html', link: './Html/' },
-              { text: 'JavaScript', link: './JavaScript/' },
-              { text: 'Css', link: './Css/' }
+              { text: 'Html', link: '/Html/' },
+              { text: 'JavaScript', link: '/JavaScript/' },
+              { text: 'Css', link: '/Css/' }
             ]
           },
           {
             text: '开发工具',
             items: [
-              { text: 'Python', link: './Python/' },
-              { text: 'Git', link: './Git/' },
+              { text: 'Python', link: '/Python/' },
+              { text: 'Git', link: '/Git/' },
               { text: 'Linux', link: './Linux/' }
             ]
           }
