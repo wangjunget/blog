@@ -1,7 +1,7 @@
 const sidebarConfig = require('./config/sidebar')
 
 module.exports = {
-  base: './',
+  base: '/blog-vuepress',
   title: 'wangjunget',
   plugins: [
     [
