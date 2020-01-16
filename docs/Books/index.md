@@ -1,1 +1,4 @@
-# 掘金小册
+---
+title: 掘金小册
+layout: CategoryIndex
+---

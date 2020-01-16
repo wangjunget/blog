@@ -1,2 +1,4 @@
-<HomeStatistics/>
+---
+layout: HomeStatistics
+---
 

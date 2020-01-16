@@ -1,17 +1,7 @@
 ---
 title: JavaScript
-next: false
+layout: CategoryIndex
 ---
-
-
-
-<!-- ![JavaScript](./static/image/javaScript-index.png) -->
-
-## 数组系列
-
-## 对象系列
-
-## 函数系列
 
 
 

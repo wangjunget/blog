@@ -1,6 +1,4 @@
 ---
 title: Vue
-next: false
+layout: CategoryIndex
 ---
-
-<!-- ![Vue](./static/image/vue-index.png) -->

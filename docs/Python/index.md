@@ -1,6 +1,6 @@
 ---
 title: Python
-next: false
+layout: CategoryIndex
 ---
 
 <!-- ![Python](./static/image/python-index.png) -->

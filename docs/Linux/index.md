@@ -1,7 +1,4 @@
 ---
 title: Linux
-next: false
-lastUpdated: false
+layout: CategoryIndex
 ---
-
-<!-- ![Linux](./static/image/linux-index.png) -->
