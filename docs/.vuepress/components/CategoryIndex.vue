@@ -2,8 +2,11 @@
   <div class="category-container">
     <navbar></navbar>
     <sidebar :items="sidebarItems"></sidebar>
-    <div class="custom-page">
-    
+    <main class="page">
+      <div class="theme-default-content content__default">
+        <Content />
+      </div>
+    </main>
     </div>
   </div>
 </template>

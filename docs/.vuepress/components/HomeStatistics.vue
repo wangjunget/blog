@@ -25,32 +25,32 @@ export default {
     pythonCount() {
       let re = /^\/Python\//
       return this.$router.options.routes.filter(item => re.test(item.path))
-        .length
+        .length / 2
     },
     vueCount() {
       let re = /^\/Vue\//
       return this.$router.options.routes.filter(item => re.test(item.path))
-        .length
+        .length / 2
     },
     javaScriptCount() {
       let re = /^\/JavaScript\//
       return this.$router.options.routes.filter(item => re.test(item.path))
-        .length
+        .length / 2
     },
     gitCount() {
       let re = /^\/Git\//
       return this.$router.options.routes.filter(item => re.test(item.path))
-        .length
+        .length / 2
     },
     linuxCount() {
       let re = /^\/Linux\//
       return this.$router.options.routes.filter(item => re.test(item.path))
-        .length
+        .length / 2
     },
     cssCount() {
       let re = /^\/Css\//
       return this.$router.options.routes.filter(item => re.test(item.path))
-        .length
+        .length / 2
     }
   },
   mounted() {

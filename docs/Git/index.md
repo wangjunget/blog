@@ -1,6 +1,6 @@
 ---
 title: Git
-next: false
+layout: CategoryIndex
 ---
 
 

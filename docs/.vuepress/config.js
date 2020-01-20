@@ -22,6 +22,14 @@ module.exports = {
         before: info => `<div class="theorem"><p class="title">${info}</p>`,
         after: '</div>',
       }
+    ],
+    [
+      'vuepress-plugin-clean-urls',
+      {
+        normalSuffix: '/',
+        indexSuffix: '/',
+        notFoundPath: '/404.html',
+      },
     ]
   ],
   themeConfig: {

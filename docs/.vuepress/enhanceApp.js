@@ -3,6 +3,8 @@ export default ({
   options,
   router,
   siteData
-}) => {}
+}) => {
+  console.log(router)
+}
 
 

@@ -9,7 +9,8 @@
   "license": "ISC",
   "dependencies": {
     "echarts": "^4.3.0",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "vuepress-plugin-clean-urls": "^1.1.1"
   },
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.0.0-rc.1",
