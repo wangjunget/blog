@@ -1,7 +1,9 @@
 const sidebarConfig = require('./config/sidebar')
 
+const isGitpage = process.env.isGitpage
+
 module.exports = {
-  base: '/blog-vuepress/',
+  base: isGitpage ? '/blog-vuepress/' : '',
   title: 'wangjunget',
   plugins: [
     [
