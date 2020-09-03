@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>组件的通信 2：派发与广播——自行实现 dispatch 和 broadcast 方法 | wangjunget</title>
+    <meta name="generator" content="VuePress 1.5.4">
+    
+    <meta name="description" content="">
+    <link rel="preload" href="/assets/css/0.styles.db29028a.css" as="style"><link rel="preload" href="/assets/js/app.6215b15e.js" as="script"><link rel="preload" href="/assets/js/8.5391eac4.js" as="script"><link rel="preload" href="/assets/js/1.97d2ef8e.js" as="script"><link rel="preload" href="/assets/js/2.ac1a40e0.js" as="script"><link rel="preload" href="/assets/js/30.ed7dd467.js" as="script"><link rel="prefetch" href="/assets/js/10.8daf845c.js"><link rel="prefetch" href="/assets/js/11.d356f649.js"><link rel="prefetch" href="/assets/js/12.82e0c808.js"><link rel="prefetch" href="/assets/js/13.8dbe0cfe.js"><link rel="prefetch" href="/assets/js/14.7e2e1e0d.js"><link rel="prefetch" href="/assets/js/15.042ce427.js"><link rel="prefetch" href="/assets/js/16.3dde987c.js"><link rel="prefetch" href="/assets/js/17.a3e3731a.js"><link rel="prefetch" href="/assets/js/18.33cee044.js"><link rel="prefetch" href="/assets/js/19.75cf190c.js"><link rel="prefetch" href="/assets/js/20.b9ef0e95.js"><link rel="prefetch" href="/assets/js/21.0ff2f763.js"><link rel="prefetch" href="/assets/js/22.7c801b38.js"><link rel="prefetch" href="/assets/js/23.70a3d8c1.js"><link rel="prefetch" href="/assets/js/24.2e18c1a2.js"><link rel="prefetch" href="/assets/js/25.f889a4da.js"><link rel="prefetch" href="/assets/js/26.83e16f41.js"><link rel="prefetch" href="/assets/js/27.ff212864.js"><link rel="prefetch" href="/assets/js/28.60b37242.js"><link rel="prefetch" href="/assets/js/29.bf515090.js"><link rel="prefetch" href="/assets/js/31.47b33077.js"><link rel="prefetch" href="/assets/js/32.ba76e7dc.js"><link rel="prefetch" href="/assets/js/33.5525a510.js"><link rel="prefetch" href="/assets/js/34.90d7d140.js"><link rel="prefetch" href="/assets/js/35.17a7eaec.js"><link rel="prefetch" href="/assets/js/36.e7986737.js"><link rel="prefetch" href="/assets/js/37.c94c75f0.js"><link rel="prefetch" href="/assets/js/38.0fc9625d.js"><link rel="prefetch" href="/assets/js/39.bafb7ceb.js"><link rel="prefetch" href="/assets/js/4.51146437.js"><link rel="prefetch" href="/assets/js/40.696f6b54.js"><link rel="prefetch" href="/assets/js/41.d0f8ba33.js"><link rel="prefetch" href="/assets/js/42.176c81b4.js"><link rel="prefetch" href="/assets/js/43.90404dfa.js"><link rel="prefetch" href="/assets/js/44.c984d557.js"><link rel="prefetch" href="/assets/js/45.244d7a44.js"><link rel="prefetch" href="/assets/js/46.24d4f1f7.js"><link rel="prefetch" href="/assets/js/47.22e17342.js"><link rel="prefetch" href="/assets/js/48.2852021f.js"><link rel="prefetch" href="/assets/js/49.e4974845.js"><link rel="prefetch" href="/assets/js/5.70d658bb.js"><link rel="prefetch" href="/assets/js/50.b0dd72d9.js"><link rel="prefetch" href="/assets/js/51.7e78b2d2.js"><link rel="prefetch" href="/assets/js/52.35a5f466.js"><link rel="prefetch" href="/assets/js/53.0fcdb7e3.js"><link rel="prefetch" href="/assets/js/54.0c63a4fe.js"><link rel="prefetch" href="/assets/js/55.7f9e063d.js"><link rel="prefetch" href="/assets/js/56.624349bb.js"><link rel="prefetch" href="/assets/js/57.8f6294be.js"><link rel="prefetch" href="/assets/js/58.e1e5a8a1.js"><link rel="prefetch" href="/assets/js/59.b74aefa9.js"><link rel="prefetch" href="/assets/js/6.d9cecd1a.js"><link rel="prefetch" href="/assets/js/60.9c0c210d.js"><link rel="prefetch" href="/assets/js/61.0c3e63a2.js"><link rel="prefetch" href="/assets/js/62.ff571ccf.js"><link rel="prefetch" href="/assets/js/63.a0bd0859.js"><link rel="prefetch" href="/assets/js/7.42822119.js"><link rel="prefetch" href="/assets/js/9.f0337ea9.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.db29028a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">wangjunget</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="分类" class="dropdown-title"><span class="title">分类</span> <span class="arrow down"></span></button> <button type="button" aria-label="分类" class="mobile-dropdown-title"><span class="title">分类</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          前端
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Html/" class="nav-link">
+  Html
+</a></li><li class="dropdown-subitem"><a href="/JavaScript/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-subitem"><a href="/Css/" class="nav-link">
+  Css
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Python/" class="nav-link">
+  Python
+</a></li><li class="dropdown-subitem"><a href="/Git/" class="nav-link">
+  Git
+</a></li><li class="dropdown-subitem"><a href="/Linux/" class="nav-link">
+  Linux
+</a></li></ul></li></ul></div></div> <a href="https://github.com/wangjunget/blog-vuepress" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="分类" class="dropdown-title"><span class="title">分类</span> <span class="arrow down"></span></button> <button type="button" aria-label="分类" class="mobile-dropdown-title"><span class="title">分类</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          前端
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Html/" class="nav-link">
+  Html
+</a></li><li class="dropdown-subitem"><a href="/JavaScript/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-subitem"><a href="/Css/" class="nav-link">
+  Css
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Python/" class="nav-link">
+  Python
+</a></li><li class="dropdown-subitem"><a href="/Git/" class="nav-link">
+  Git
+</a></li><li class="dropdown-subitem"><a href="/Linux/" class="nav-link">
+  Linux
+</a></li></ul></li></ul></div></div> <a href="https://github.com/wangjunget/blog-vuepress" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><a href="/Books/" aria-current="page" class="sidebar-link">概览</a></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Vue.js组件精讲</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/Books/" aria-current="page" class="sidebar-link">概览</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/Vue%20%E7%9A%84%E6%9E%84%E9%80%A0%E5%99%A8%E2%80%94%E2%80%94extend%20%E4%B8%8E%E6%89%8B%E5%8A%A8%E6%8C%82%E8%BD%BD%E2%80%94%E2%80%94$mount/" class="sidebar-link">Vue 的构造器——extend 与手动挂载——$mount</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E/" class="sidebar-link">写在最后</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%9F%BA%E7%A1%80%EF%BC%9AVue.js%20%E7%BB%84%E4%BB%B6%E7%9A%84%E4%B8%89%E4%B8%AA%20API%EF%BC%9Aprop%E3%80%81event%E3%80%81slot/" class="sidebar-link">基础：Vue.js 组件的三个 API：prop、event、slot</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%201%EF%BC%9A%E5%85%B7%E6%9C%89%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E5%8A%9F%E8%83%BD%E7%9A%84%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94Form/" class="sidebar-link">实战 1：具有数据校验功能的表单组件——Form</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%202%EF%BC%9A%E7%BB%84%E5%90%88%E5%A4%9A%E9%80%89%E6%A1%86%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94CheckboxGroup%20&amp;%20Checkbox/" class="sidebar-link">实战 2：组合多选框组件——CheckboxGroup &amp; Checkbox</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%203%EF%BC%9A%E5%8A%A8%E6%80%81%E6%B8%B2%E6%9F%93%20.vue%20%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94%20Display/" class="sidebar-link">实战 3：动态渲染 .vue 文件的组件—— Display</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%204%EF%BC%9A%E5%85%A8%E5%B1%80%E6%8F%90%E7%A4%BA%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94$Alert/" class="sidebar-link">实战 4：全局提示组件——$Alert</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%205%EF%BC%9A%E5%8F%AF%E7%94%A8%20Render%20%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%97%E7%9A%84%E8%A1%A8%E6%A0%BC%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94Table/" class="sidebar-link">实战 5：可用 Render 自定义列的表格组件——Table</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%206%EF%BC%9A%E5%8F%AF%E7%94%A8%20slot-scope%20%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%97%E7%9A%84%E8%A1%A8%E6%A0%BC%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94Table/" class="sidebar-link">实战 6：可用 slot-scope 自定义列的表格组件——Table</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%207%EF%BC%9A%E6%A0%91%E5%BD%A2%E6%8E%A7%E4%BB%B6%E2%80%94%E2%80%94Tree/" class="sidebar-link">实战 7：树形控件——Tree</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%BC%80%E7%AF%87%EF%BC%9AVue.js%20%E7%9A%84%E7%B2%BE%E9%AB%93%E2%80%94%E2%80%94%E7%BB%84%E4%BB%B6/" class="sidebar-link">开篇：Vue.js 的精髓——组件</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E6%8B%93%E5%B1%95%EF%BC%9AVue.js%20%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%9A%84%20API%20%E8%AF%A6%E8%A7%A3/" class="sidebar-link">拓展：Vue.js 容易忽略的 API 详解</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E6%8B%93%E5%B1%95%EF%BC%9AVue.js%20%E9%9D%A2%E8%AF%95%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91/" class="sidebar-link">拓展：Vue.js 面试、常见问题答疑</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E6%8B%93%E5%B1%95%EF%BC%9A%E5%A6%82%E4%BD%95%E5%81%9A%E5%A5%BD%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%EF%BC%88%E4%B8%8A%E7%AF%87%EF%BC%89/" class="sidebar-link">拓展：如何做好一个开源项目（上篇）</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E6%8B%93%E5%B1%95%EF%BC%9A%E5%A6%82%E4%BD%95%E5%81%9A%E5%A5%BD%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%EF%BC%88%E4%B8%8B%E7%AF%87%EF%BC%89/" class="sidebar-link">拓展：如何做好一个开源项目（下篇）</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E6%9B%B4%E7%81%B5%E6%B4%BB%E7%9A%84%E7%BB%84%E4%BB%B6%EF%BC%9ARender%20%E5%87%BD%E6%95%B0%E4%B8%8E%20Functional%20Render/" class="sidebar-link">更灵活的组件：Render 函数与 Functional Render</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E7%BB%84%E4%BB%B6%E7%9A%84%E9%80%9A%E4%BF%A1%201%EF%BC%9Aprovide%20%20%20inject/" class="sidebar-link">组件的通信 1：provide   inject</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E7%BB%84%E4%BB%B6%E7%9A%84%E9%80%9A%E4%BF%A1%202%EF%BC%9A%E6%B4%BE%E5%8F%91%E4%B8%8E%E5%B9%BF%E6%92%AD%E2%80%94%E2%80%94%E8%87%AA%E8%A1%8C%E5%AE%9E%E7%8E%B0%20dispatch%20%E5%92%8C%20broadcast%20%E6%96%B9%E6%B3%95/" aria-current="page" class="active sidebar-link">组件的通信 2：派发与广播——自行实现 dispatch 和 broadcast 方法</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E7%BB%84%E4%BB%B6%E7%9A%84%E9%80%9A%E4%BF%A1%202%EF%BC%9A%E6%B4%BE%E5%8F%91%E4%B8%8E%E5%B9%BF%E6%92%AD%E2%80%94%E2%80%94%E8%87%AA%E8%A1%8C%E5%AE%9E%E7%8E%B0%20dispatch%20%E5%92%8C%20broadcast%20%E6%96%B9%E6%B3%95/#on-与-emit" class="sidebar-link">$on 与 $emit</a></li><li class="sidebar-sub-header"><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E7%BB%84%E4%BB%B6%E7%9A%84%E9%80%9A%E4%BF%A1%202%EF%BC%9A%E6%B4%BE%E5%8F%91%E4%B8%8E%E5%B9%BF%E6%92%AD%E2%80%94%E2%80%94%E8%87%AA%E8%A1%8C%E5%AE%9E%E7%8E%B0%20dispatch%20%E5%92%8C%20broadcast%20%E6%96%B9%E6%B3%95/#vue-js-1-x-的-dispatch-与-broadcast" class="sidebar-link">Vue.js 1.x 的 $dispatch 与 $broadcast</a></li><li class="sidebar-sub-header"><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E7%BB%84%E4%BB%B6%E7%9A%84%E9%80%9A%E4%BF%A1%202%EF%BC%9A%E6%B4%BE%E5%8F%91%E4%B8%8E%E5%B9%BF%E6%92%AD%E2%80%94%E2%80%94%E8%87%AA%E8%A1%8C%E5%AE%9E%E7%8E%B0%20dispatch%20%E5%92%8C%20broadcast%20%E6%96%B9%E6%B3%95/#自行实现-dispatch-和-broadcast-方法" class="sidebar-link">自行实现 dispatch 和 broadcast 方法</a></li><li class="sidebar-sub-header"><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E7%BB%84%E4%BB%B6%E7%9A%84%E9%80%9A%E4%BF%A1%202%EF%BC%9A%E6%B4%BE%E5%8F%91%E4%B8%8E%E5%B9%BF%E6%92%AD%E2%80%94%E2%80%94%E8%87%AA%E8%A1%8C%E5%AE%9E%E7%8E%B0%20dispatch%20%E5%92%8C%20broadcast%20%E6%96%B9%E6%B3%95/#结语" class="sidebar-link">结语</a></li></ul></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E7%BB%84%E4%BB%B6%E7%9A%84%E9%80%9A%E4%BF%A1%203%EF%BC%9A%E6%89%BE%E5%88%B0%E4%BB%BB%E6%84%8F%E7%BB%84%E4%BB%B6%E5%AE%9E%E4%BE%8B%E2%80%94%E2%80%94findComponents%20%E7%B3%BB%E5%88%97%E6%96%B9%E6%B3%95/" class="sidebar-link">组件的通信 3：找到任意组件实例——findComponents 系列方法</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E9%80%92%E5%BD%92%E7%BB%84%E4%BB%B6%E4%B8%8E%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6/" class="sidebar-link">递归组件与动态组件</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="组件的通信-2-派发与广播-自行实现-dispatch-和-broadcast-方法"><a href="#组件的通信-2-派发与广播-自行实现-dispatch-和-broadcast-方法" class="header-anchor">#</a> 组件的通信 2：派发与广播——自行实现 dispatch 和 broadcast 方法</h1> <p>上一讲的 provide / inject API 主要解决了跨级组件间的通信问题，不过它的使用场景，主要是子组件获取上级组件的状态，跨级组件间建立了一种主动提供与依赖注入的关系。然后有两种场景它不能很好的解决：</p> <ul><li>父组件向子组件（支持跨级）传递数据；</li> <li>子组件向父组件（支持跨级）传递数据。</li></ul> <p>这种父子（含跨级）传递数据的通信方式，Vue.js 并没有提供原生的 API 来支持，而是推荐使用大型数据状态管理工具 Vuex，而我们之前已经介绍过 Vuex 的场景与在独立组件（或库）中使用的限制。本小节则介绍一种在父子组件间通信的方法 <code>dispatch</code> 和 <code>broadcast</code>。</p> <h2 id="on-与-emit"><a href="#on-与-emit" class="header-anchor">#</a> $on 与 $emit</h2> <p>如果您使用过较早的 Vue.js 1.x 版本，肯定对 <em>$dispatch</em> 和 <em>$broadcast</em> 这两个内置的方法很熟悉，不过它们都在 Vue.js 2.x 里废弃了。在正式介绍主角前，我们先看看 <code>$on</code> 与 <code>$emit</code> 这两个 API，因为它们是本节内容的基础。</p> <p><code>$emit</code> 会在<strong>当前组件</strong>实例上触发自定义事件，并传递一些参数给监听器的回调，一般来说，都是在父级调用这个组件时，使用 <code>@on</code> 的方式来监听自定义事件的，比如在子组件中触发事件：</p> <div class="language- extra-class"><pre class="language-text"><code>// child.vue，部分代码省略
+export default {
+  methods: {
+    handleEmitEvent () {
+      this.$emit('test', 'Hello Vue.js');
+    }
+  }
+}
+
+</code></pre></div><p>在父组件中监听由 <em>child.vue</em> 触发的自定义事件 <strong>test</strong>：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;!-- parent.vue，部分代码省略--&gt;
+&lt;template&gt;
+  &lt;child-component @test=&quot;handleEvent&quot;&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    methods: {
+      handleEvent (text) {
+      	console.log(text);  // Hello Vue.js
+      }
+    }
+  }
+&lt;/script&gt;
+
+</code></pre></div><p>这里看似是在父组件 <em>parent.vue</em> 中绑定的自定义事件 <strong>test</strong> 的处理句柄，然而事件 test 并不是在父组件上触发的，而是在子组件 <em>child.vue</em> 里触发的，只是通过 <code>v-on</code> 在父组件中监听。既然是子组件自己触发的，那它自己也可以监听到，这就要使用 <code>$on</code> 来监听实例上的事件，换言之，组件使用 <code>$emit</code> 在自己实例上触发事件，并用 <code>$on</code> 监听它。</p> <p>听起来这种神（sāo）操作有点多此一举，我们不妨先来看个示例：</p> <p>（也可通过在线链接 <a href="https://run.iviewui.com/ggsomfHM" target="_blank" rel="noopener noreferrer">https://run.iviewui.com/ggsomfHM<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 直接运行该示例）</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;button @click=&quot;handleEmitEvent&quot;&gt;触发自定义事件&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    methods: {
+      handleEmitEvent () {
+        // 在当前组件上触发自定义事件 test，并传值
+        this.$emit('test', 'Hello Vue.js')
+      }
+    },
+    mounted () {
+      // 监听自定义事件 test
+      this.$on('test', (text) =&gt; {
+        window.alert(text);
+      });
+    }
+  }
+&lt;/script&gt;
+
+</code></pre></div><p><code>$on</code> 监听了自己触发的自定义事件 test，因为有时不确定何时会触发事件，一般会在 <code>mounted</code> 或 <code>created</code> 钩子中来监听。</p> <p>仅上面的示例，的确是多此一举的，因为大可在 handleEmitEvent 里直接写 window.alert(text)，没必要绕一圈。</p> <p>之所以多此一举，是因为 handleEmitEvent 是当前组件内的 <code>&lt;button&gt;</code> 调用的，如果这个方法不是它自己调用，而是其它组件调用的，那这个用法就大有可为了。</p> <p>了解了 <code>$on</code> 和 <code>$emit</code> 的用法后，我们再来看两个“过时的” API。</p> <h2 id="vue-js-1-x-的-dispatch-与-broadcast"><a href="#vue-js-1-x-的-dispatch-与-broadcast" class="header-anchor">#</a> Vue.js 1.x 的 $dispatch 与 $broadcast</h2> <p>虽然 Vue.js 1.x 已经成为过去时，但为了充分理解本节通信方法的使用场景，还是有必要来了解一点它的历史。</p> <p>在 Vue.js 1.x 中，提供了两个方法：<code>$dispatch</code> 和 <code>$broadcast</code> ，前者用于向上级派发事件，只要是它的父级（一级或多级以上），都可以在组件内通过 <code>$on</code> （或 events，2.x 已废弃）监听到，后者相反，是由上级向下级广播事件的。</p> <p>来看一个简单的示例：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;!-- 注意：该示例为 Vue.js 1.x 版本 --&gt;
+&lt;!-- 子组件 --&gt;
+&lt;template&gt;
+  &lt;button @click=&quot;handleDispatch&quot;&gt;派发事件&lt;/button&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  methods: {
+    handleDispatch () {
+      this.$dispatch('test', 'Hello, Vue.js');
+    }
+  }
+}
+&lt;/script&gt;
+
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>&lt;!-- 父组件，部分代码省略 --&gt;
+&lt;template&gt;
+  &lt;child-component&gt;&lt;/child-component&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    mounted () {
+      this.$on('test', (text) =&gt; {
+        console.log(text);  // Hello, Vue.js
+      });
+    }
+  }
+&lt;/script&gt;
+
+</code></pre></div><p>$broadcast 类似，只不过方向相反。这两种方法一旦发出事件后，任何组件都是可以接收到的，就近原则，而且会在第一次接收到后停止冒泡，除非返回 true。</p> <p>这两个方法虽然看起来很好用，但是在 Vue.js 2.x 中都废弃了，官方给出的解释是：</p> <blockquote><p>因为基于组件树结构的事件流方式有时让人难以理解，并且在组件结构扩展的过程中会变得越来越脆弱。</p></blockquote> <p>虽然在业务开发中，它没有 Vuex 这样专门管理状态的插件清晰好用，但对独立组件（库）的开发，绝对是福音。因为独立组件一般层级并不会很复杂，并且剥离了业务，不会变的难以维护。</p> <p>知道了 <em>$dispatch</em> 和 <em>$broadcast</em> 的前世今生，接下来我们就在 Vue.js 2.x 中自行实现这两个方法。</p> <h2 id="自行实现-dispatch-和-broadcast-方法"><a href="#自行实现-dispatch-和-broadcast-方法" class="header-anchor">#</a> 自行实现 dispatch 和 broadcast 方法</h2> <p>自行实现的 dispatch 和 broadcast 方法，不能保证跟 Vue.js 1.x 的 <em>$dispatch</em> 和 <em>$broadcast</em> 具有完全相同的体验，但基本功能是一样的，都是解决父子组件（含跨级）间的通信问题。</p> <p>通过目前已知的信息，我们要实现的 dispatch 和 broadcast 方法，将具有以下功能：</p> <ul><li>在子组件调用 dispatch 方法，向上级指定的组件实例（最近的）上触发自定义事件，并传递数据，且该上级组件已预先通过 <code>$on</code> 监听了这个事件；</li> <li>相反，在父组件调用 broadcast 方法，向下级指定的组件实例（最近的）上触发自定义事件，并传递数据，且该下级组件已预先通过 <code>$on</code> 监听了这个事件。</li></ul> <p>实现这对方法的关键点在于，如何正确地向上或向下找到对应的组件实例，并在它上面触发方法。在设计一个新功能（features）时，可以先确定这个功能的 API 是什么，也就是说方法名、参数、使用样例，确定好 API，再来写具体的代码。</p> <p>因为 Vue.js 内置的方法，才是以 <code>$</code> 开头的，比如 <code>$nextTick</code>、<code>$emit</code> 等，为了避免不必要的冲突并遵循规范，这里的 dispatch 和 broadcast 方法名前不加 <code>$</code>。并且该方法可能在很多组件中都会使用，复用起见，我们封装在混合（mixins）里。那它的使用样例可能是这样的：</p> <div class="language- extra-class"><pre class="language-text"><code>// 部分代码省略
+import Emitter from '../mixins/emitter.js'
+
+export default {
+  mixins: [ Emitter ],
+  methods: {
+    handleDispatch () {
+      this.dispatch();  // ①
+    },
+    handleBroadcast () {
+      this.broadcast();  // ②
+    }
+  }
+}
+
+</code></pre></div><p>上例中行 ① 和行 ② 的两个方法就是在导入的混合 <strong>emitter.js</strong> 中定义的，这个稍后我们再讲，先来分析这两个方法应该传入什么参数。一般来说，为了跟 Vue.js 1.x 的方法一致，第一个参数应当是自定义事件名，比如 “test”，第二个参数是传递的数据，比如 “Hello, Vue.js”，但在这里，有什么问题呢？只通过这两个参数，我们没办法知道要在哪个组件上触发事件，因为自行实现的这对方法，与 Vue.js 1.x 的原生方法机理上是有区别的。上文说到，实现这对方法的关键点在于准确地<strong>找到组件实例</strong>。那在寻找组件实例上，我们的“惯用伎俩”就是通过遍历来匹配组件的 <code>name</code> 选项，在独立组件（库）里，每个组件的 <code>name</code> 值应当是唯一的，name 主要用于递归组件，在后面小节会单独介绍。</p> <p>先来看下 <strong>emitter.js</strong> 的代码：</p> <div class="language- extra-class"><pre class="language-text"><code>function broadcast(componentName, eventName, params) {
+  this.$children.forEach(child =&gt; {
+    const name = child.$options.name;
+
+    if (name === componentName) {
+      child.$emit.apply(child, [eventName].concat(params));
+    } else {
+      broadcast.apply(child, [componentName, eventName].concat([params]));
+    }
+  });
+}
+export default {
+  methods: {
+    dispatch(componentName, eventName, params) {
+      let parent = this.$parent || this.$root;
+      let name = parent.$options.name;
+
+      while (parent &amp;&amp; (!name || name !== componentName)) {
+        parent = parent.$parent;
+
+        if (parent) {
+          name = parent.$options.name;
+        }
+      }
+      if (parent) {
+        parent.$emit.apply(parent, [eventName].concat(params));
+      }
+    },
+    broadcast(componentName, eventName, params) {
+      broadcast.call(this, componentName, eventName, params);
+    }
+  }
+};
+
+</code></pre></div><p>因为是用作 mixins 导入，所以在 methods 里定义的 dispatch 和 broadcast 方法会被混合到组件里，自然就可以用 <code>this.dispatch</code> 和 <code>this.broadcast</code> 来使用。</p> <p>这两个方法都接收了三个参数，第一个是组件的 <code>name</code> 值，用于向上或向下递归遍历来寻找对应的组件，第二个和第三个就是上文分析的自定义事件名称和要传递的数据。</p> <p>可以看到，在 dispatch 里，通过 <em>while</em> 语句，不断向上遍历更新当前组件（即上下文为当前调用该方法的组件）的父组件实例（变量 parent 即为父组件实例），直到匹配到定义的 <code>componentName</code> 与某个上级组件的 <code>name</code> 选项一致时，结束循环，并在找到的组件实例上，调用 <code>$emit</code> 方法来触发自定义事件 <code>eventName</code>。broadcast 方法与之类似，只不过是向下遍历寻找。</p> <p>来看一下具体的使用方法。有 <strong>A.vue</strong> 和 <strong>B.vue</strong> 两个组件，其中 B 是 A 的子组件，中间可能跨多级，在 A 中向 B 通信：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;!-- A.vue --&gt;
+&lt;template&gt;
+	&lt;button @click=&quot;handleClick&quot;&gt;触发事件&lt;/button&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  import Emitter from '../mixins/emitter.js';
+  
+  export default {
+    name: 'componentA',
+    mixins: [ Emitter ],
+    methods: {
+      handleClick () {
+        this.broadcast('componentB', 'on-message', 'Hello Vue.js');
+      }
+    }
+  }
+&lt;/script&gt;
+
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>// B.vue
+export default {
+  name: 'componentB',
+  created () {
+    this.$on('on-message', this.showMessage);
+  },
+  methods: {
+    showMessage (text) {
+      window.alert(text);
+    }
+  }
+}
+
+</code></pre></div><p>同理，如果是 B 向 A 通信，在 B 中调用 dispatch 方法，在 A 中使用 $on 监听事件即可。</p> <p>以上就是自行实现的 dispatch 和 broadcast 方法，相比 Vue.js 1.x，有以下不同：</p> <ul><li>需要额外传入组件的 name 作为第一个参数；</li> <li>无冒泡机制；</li> <li>第三个参数传递的数据，只能是一个（较多时可以传入一个对象），而 Vue.js 1.x 可以传入多个参数，当然，你对 emitter.js 稍作修改，也能支持传入多个参数，只是一般场景传入一个对象足以。</li></ul> <h2 id="结语"><a href="#结语" class="header-anchor">#</a> 结语</h2> <p>Vue.js 的组件通信到此还没完全结束，如果你想“趁热打铁”一口气看完，可以先阅读第 6 节组件的通信 3。亦或按顺序看下一节的实战，来进一步加深理解 provide / inject 和 dispatch / broadcast 这两对通信方法的使用场景。</p> <p>注：本节部分代码参考 <a href="https://github.com/iview/iview/blob/2.0/src/mixins/emitter.js" target="_blank" rel="noopener noreferrer">iView<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>。</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">最近更新:</span> <span class="time">2020-01-03 03:19:42</span></div></footer> <!----> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.6215b15e.js" defer></script><script src="/assets/js/8.5391eac4.js" defer></script><script src="/assets/js/1.97d2ef8e.js" defer></script><script src="/assets/js/2.ac1a40e0.js" defer></script><script src="/assets/js/30.ed7dd467.js" defer></script>
+  </body>
+</html>

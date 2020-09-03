@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>实战 4：全局提示组件——$Alert | wangjunget</title>
+    <meta name="generator" content="VuePress 1.5.4">
+    
+    <meta name="description" content="">
+    <link rel="preload" href="/assets/css/0.styles.db29028a.css" as="style"><link rel="preload" href="/assets/js/app.6215b15e.js" as="script"><link rel="preload" href="/assets/js/8.5391eac4.js" as="script"><link rel="preload" href="/assets/js/1.97d2ef8e.js" as="script"><link rel="preload" href="/assets/js/2.ac1a40e0.js" as="script"><link rel="preload" href="/assets/js/19.75cf190c.js" as="script"><link rel="prefetch" href="/assets/js/10.8daf845c.js"><link rel="prefetch" href="/assets/js/11.d356f649.js"><link rel="prefetch" href="/assets/js/12.82e0c808.js"><link rel="prefetch" href="/assets/js/13.8dbe0cfe.js"><link rel="prefetch" href="/assets/js/14.7e2e1e0d.js"><link rel="prefetch" href="/assets/js/15.042ce427.js"><link rel="prefetch" href="/assets/js/16.3dde987c.js"><link rel="prefetch" href="/assets/js/17.a3e3731a.js"><link rel="prefetch" href="/assets/js/18.33cee044.js"><link rel="prefetch" href="/assets/js/20.b9ef0e95.js"><link rel="prefetch" href="/assets/js/21.0ff2f763.js"><link rel="prefetch" href="/assets/js/22.7c801b38.js"><link rel="prefetch" href="/assets/js/23.70a3d8c1.js"><link rel="prefetch" href="/assets/js/24.2e18c1a2.js"><link rel="prefetch" href="/assets/js/25.f889a4da.js"><link rel="prefetch" href="/assets/js/26.83e16f41.js"><link rel="prefetch" href="/assets/js/27.ff212864.js"><link rel="prefetch" href="/assets/js/28.60b37242.js"><link rel="prefetch" href="/assets/js/29.bf515090.js"><link rel="prefetch" href="/assets/js/30.ed7dd467.js"><link rel="prefetch" href="/assets/js/31.47b33077.js"><link rel="prefetch" href="/assets/js/32.ba76e7dc.js"><link rel="prefetch" href="/assets/js/33.5525a510.js"><link rel="prefetch" href="/assets/js/34.90d7d140.js"><link rel="prefetch" href="/assets/js/35.17a7eaec.js"><link rel="prefetch" href="/assets/js/36.e7986737.js"><link rel="prefetch" href="/assets/js/37.c94c75f0.js"><link rel="prefetch" href="/assets/js/38.0fc9625d.js"><link rel="prefetch" href="/assets/js/39.bafb7ceb.js"><link rel="prefetch" href="/assets/js/4.51146437.js"><link rel="prefetch" href="/assets/js/40.696f6b54.js"><link rel="prefetch" href="/assets/js/41.d0f8ba33.js"><link rel="prefetch" href="/assets/js/42.176c81b4.js"><link rel="prefetch" href="/assets/js/43.90404dfa.js"><link rel="prefetch" href="/assets/js/44.c984d557.js"><link rel="prefetch" href="/assets/js/45.244d7a44.js"><link rel="prefetch" href="/assets/js/46.24d4f1f7.js"><link rel="prefetch" href="/assets/js/47.22e17342.js"><link rel="prefetch" href="/assets/js/48.2852021f.js"><link rel="prefetch" href="/assets/js/49.e4974845.js"><link rel="prefetch" href="/assets/js/5.70d658bb.js"><link rel="prefetch" href="/assets/js/50.b0dd72d9.js"><link rel="prefetch" href="/assets/js/51.7e78b2d2.js"><link rel="prefetch" href="/assets/js/52.35a5f466.js"><link rel="prefetch" href="/assets/js/53.0fcdb7e3.js"><link rel="prefetch" href="/assets/js/54.0c63a4fe.js"><link rel="prefetch" href="/assets/js/55.7f9e063d.js"><link rel="prefetch" href="/assets/js/56.624349bb.js"><link rel="prefetch" href="/assets/js/57.8f6294be.js"><link rel="prefetch" href="/assets/js/58.e1e5a8a1.js"><link rel="prefetch" href="/assets/js/59.b74aefa9.js"><link rel="prefetch" href="/assets/js/6.d9cecd1a.js"><link rel="prefetch" href="/assets/js/60.9c0c210d.js"><link rel="prefetch" href="/assets/js/61.0c3e63a2.js"><link rel="prefetch" href="/assets/js/62.ff571ccf.js"><link rel="prefetch" href="/assets/js/63.a0bd0859.js"><link rel="prefetch" href="/assets/js/7.42822119.js"><link rel="prefetch" href="/assets/js/9.f0337ea9.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.db29028a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">wangjunget</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="分类" class="dropdown-title"><span class="title">分类</span> <span class="arrow down"></span></button> <button type="button" aria-label="分类" class="mobile-dropdown-title"><span class="title">分类</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          前端
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Html/" class="nav-link">
+  Html
+</a></li><li class="dropdown-subitem"><a href="/JavaScript/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-subitem"><a href="/Css/" class="nav-link">
+  Css
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Python/" class="nav-link">
+  Python
+</a></li><li class="dropdown-subitem"><a href="/Git/" class="nav-link">
+  Git
+</a></li><li class="dropdown-subitem"><a href="/Linux/" class="nav-link">
+  Linux
+</a></li></ul></li></ul></div></div> <a href="https://github.com/wangjunget/blog-vuepress" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="分类" class="dropdown-title"><span class="title">分类</span> <span class="arrow down"></span></button> <button type="button" aria-label="分类" class="mobile-dropdown-title"><span class="title">分类</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          前端
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Html/" class="nav-link">
+  Html
+</a></li><li class="dropdown-subitem"><a href="/JavaScript/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-subitem"><a href="/Css/" class="nav-link">
+  Css
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/Python/" class="nav-link">
+  Python
+</a></li><li class="dropdown-subitem"><a href="/Git/" class="nav-link">
+  Git
+</a></li><li class="dropdown-subitem"><a href="/Linux/" class="nav-link">
+  Linux
+</a></li></ul></li></ul></div></div> <a href="https://github.com/wangjunget/blog-vuepress" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><a href="/Books/" aria-current="page" class="sidebar-link">概览</a></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Vue.js组件精讲</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/Books/" aria-current="page" class="sidebar-link">概览</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/Vue%20%E7%9A%84%E6%9E%84%E9%80%A0%E5%99%A8%E2%80%94%E2%80%94extend%20%E4%B8%8E%E6%89%8B%E5%8A%A8%E6%8C%82%E8%BD%BD%E2%80%94%E2%80%94$mount/" class="sidebar-link">Vue 的构造器——extend 与手动挂载——$mount</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E/" class="sidebar-link">写在最后</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%9F%BA%E7%A1%80%EF%BC%9AVue.js%20%E7%BB%84%E4%BB%B6%E7%9A%84%E4%B8%89%E4%B8%AA%20API%EF%BC%9Aprop%E3%80%81event%E3%80%81slot/" class="sidebar-link">基础：Vue.js 组件的三个 API：prop、event、slot</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%201%EF%BC%9A%E5%85%B7%E6%9C%89%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E5%8A%9F%E8%83%BD%E7%9A%84%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94Form/" class="sidebar-link">实战 1：具有数据校验功能的表单组件——Form</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%202%EF%BC%9A%E7%BB%84%E5%90%88%E5%A4%9A%E9%80%89%E6%A1%86%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94CheckboxGroup%20&amp;%20Checkbox/" class="sidebar-link">实战 2：组合多选框组件——CheckboxGroup &amp; Checkbox</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%203%EF%BC%9A%E5%8A%A8%E6%80%81%E6%B8%B2%E6%9F%93%20.vue%20%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94%20Display/" class="sidebar-link">实战 3：动态渲染 .vue 文件的组件—— Display</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%204%EF%BC%9A%E5%85%A8%E5%B1%80%E6%8F%90%E7%A4%BA%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94$Alert/" aria-current="page" class="active sidebar-link">实战 4：全局提示组件——$Alert</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%204%EF%BC%9A%E5%85%A8%E5%B1%80%E6%8F%90%E7%A4%BA%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94$Alert/#_1-3-先把组件写好" class="sidebar-link">1/3 先把组件写好</a></li><li class="sidebar-sub-header"><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%204%EF%BC%9A%E5%85%A8%E5%B1%80%E6%8F%90%E7%A4%BA%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94$Alert/#_2-3-实例化封装" class="sidebar-link">2/3 实例化封装</a></li><li class="sidebar-sub-header"><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%204%EF%BC%9A%E5%85%A8%E5%B1%80%E6%8F%90%E7%A4%BA%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94$Alert/#_3-3-入口" class="sidebar-link">3/3 入口</a></li><li class="sidebar-sub-header"><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%204%EF%BC%9A%E5%85%A8%E5%B1%80%E6%8F%90%E7%A4%BA%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94$Alert/#友情提示" class="sidebar-link">友情提示</a></li><li class="sidebar-sub-header"><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%204%EF%BC%9A%E5%85%A8%E5%B1%80%E6%8F%90%E7%A4%BA%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94$Alert/#结语" class="sidebar-link">结语</a></li></ul></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%205%EF%BC%9A%E5%8F%AF%E7%94%A8%20Render%20%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%97%E7%9A%84%E8%A1%A8%E6%A0%BC%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94Table/" class="sidebar-link">实战 5：可用 Render 自定义列的表格组件——Table</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%206%EF%BC%9A%E5%8F%AF%E7%94%A8%20slot-scope%20%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%97%E7%9A%84%E8%A1%A8%E6%A0%BC%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94Table/" class="sidebar-link">实战 6：可用 slot-scope 自定义列的表格组件——Table</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%AE%9E%E6%88%98%207%EF%BC%9A%E6%A0%91%E5%BD%A2%E6%8E%A7%E4%BB%B6%E2%80%94%E2%80%94Tree/" class="sidebar-link">实战 7：树形控件——Tree</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E5%BC%80%E7%AF%87%EF%BC%9AVue.js%20%E7%9A%84%E7%B2%BE%E9%AB%93%E2%80%94%E2%80%94%E7%BB%84%E4%BB%B6/" class="sidebar-link">开篇：Vue.js 的精髓——组件</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E6%8B%93%E5%B1%95%EF%BC%9AVue.js%20%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%9A%84%20API%20%E8%AF%A6%E8%A7%A3/" class="sidebar-link">拓展：Vue.js 容易忽略的 API 详解</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E6%8B%93%E5%B1%95%EF%BC%9AVue.js%20%E9%9D%A2%E8%AF%95%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91/" class="sidebar-link">拓展：Vue.js 面试、常见问题答疑</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E6%8B%93%E5%B1%95%EF%BC%9A%E5%A6%82%E4%BD%95%E5%81%9A%E5%A5%BD%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%EF%BC%88%E4%B8%8A%E7%AF%87%EF%BC%89/" class="sidebar-link">拓展：如何做好一个开源项目（上篇）</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E6%8B%93%E5%B1%95%EF%BC%9A%E5%A6%82%E4%BD%95%E5%81%9A%E5%A5%BD%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%EF%BC%88%E4%B8%8B%E7%AF%87%EF%BC%89/" class="sidebar-link">拓展：如何做好一个开源项目（下篇）</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E6%9B%B4%E7%81%B5%E6%B4%BB%E7%9A%84%E7%BB%84%E4%BB%B6%EF%BC%9ARender%20%E5%87%BD%E6%95%B0%E4%B8%8E%20Functional%20Render/" class="sidebar-link">更灵活的组件：Render 函数与 Functional Render</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E7%BB%84%E4%BB%B6%E7%9A%84%E9%80%9A%E4%BF%A1%201%EF%BC%9Aprovide%20%20%20inject/" class="sidebar-link">组件的通信 1：provide   inject</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E7%BB%84%E4%BB%B6%E7%9A%84%E9%80%9A%E4%BF%A1%202%EF%BC%9A%E6%B4%BE%E5%8F%91%E4%B8%8E%E5%B9%BF%E6%92%AD%E2%80%94%E2%80%94%E8%87%AA%E8%A1%8C%E5%AE%9E%E7%8E%B0%20dispatch%20%E5%92%8C%20broadcast%20%E6%96%B9%E6%B3%95/" class="sidebar-link">组件的通信 2：派发与广播——自行实现 dispatch 和 broadcast 方法</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E7%BB%84%E4%BB%B6%E7%9A%84%E9%80%9A%E4%BF%A1%203%EF%BC%9A%E6%89%BE%E5%88%B0%E4%BB%BB%E6%84%8F%E7%BB%84%E4%BB%B6%E5%AE%9E%E4%BE%8B%E2%80%94%E2%80%94findComponents%20%E7%B3%BB%E5%88%97%E6%96%B9%E6%B3%95/" class="sidebar-link">组件的通信 3：找到任意组件实例——findComponents 系列方法</a></li><li><a href="/Books/Vue.js%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2/%E9%80%92%E5%BD%92%E7%BB%84%E4%BB%B6%E4%B8%8E%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6/" class="sidebar-link">递归组件与动态组件</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="实战-4-全局提示组件-alert"><a href="#实战-4-全局提示组件-alert" class="header-anchor">#</a> 实战 4：全局提示组件——$Alert</h1> <p>有一种 Vue.js 组件，它不同于常规的组件，但组件结构本身很简单，比如下面的全局提示组件：</p> <p><img src="https://user-gold-cdn.xitu.io/2018/11/10/166fcc05107e987c?w=3187&amp;h=2087&amp;f=png&amp;s=265274" alt=""></p> <p>实现这样一个组件并不难，只需要简单的几行 div 和 css，但使用者可能要这样来显示组件：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;Alert v-if=&quot;show&quot;&gt;这是一条提示信息&lt;/Alert&gt;
+    &lt;button @click=&quot;show = true&quot;&gt;显示&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  import Alert from '../component/alert.vue';
+
+  export default {
+    components: { Alert },
+    data () {
+      return {
+        show: false
+      }
+    }
+  }
+&lt;/script&gt;
+
+</code></pre></div><p>这样的用法，有以下缺点：</p> <ul><li>每个使用的地方，都得注册组件；</li> <li>需要预先将 <code>&lt;Alert&gt;</code> 放置在模板中；</li> <li>需要额外的 data 来控制 Alert 的显示状态；</li> <li>Alert 的位置，是在当前组件位置，并非在 body 下，有可能会被其它组件遮挡。</li></ul> <p>总之对使用者来说是很不友好的，那怎样才能优雅地实现这样一个组件呢？事实上，原生的 JavaScript 早已给出了答案：</p> <div class="language- extra-class"><pre class="language-text"><code>// 全局提示
+window.alert('这是一条提示信息');
+// 二次确认
+const confirm = window.confirm('确认删除吗？');
+if (confirm) {
+  // ok
+} else {
+  // cancel
+}
+
+</code></pre></div><p>所以，结论是：我们需要一个能用 JavaScript 调用组件的 API。</p> <p>如果你使用过 iView 之类的组件库，一定对它内置的 $Message、$Notice、$Modal 等组件很熟悉，本节就来开发一个全局通知组件——$Alert。</p> <h2 id="_1-3-先把组件写好"><a href="#_1-3-先把组件写好" class="header-anchor">#</a> 1/3 先把组件写好</h2> <p>我们期望最终的 API 是这样的：</p> <div class="language- extra-class"><pre class="language-text"><code>methods: {
+  handleShow () {
+    this.$Alert({
+      content: '这是一条提示信息',
+      duration: 3
+    })
+  }
+}
+
+</code></pre></div><p><code>this.$Alert</code> 可以在任何位置调用，无需单独引入。该方法接收两个参数：</p> <ul><li>content：提示内容；</li> <li>duration：持续时间，单位秒，默认 1.5 秒，到时间自动消失。</li></ul> <p>最终效果如下：</p> <p><img src="https://user-gold-cdn.xitu.io/2018/11/10/166fcc09c43c2ad1?w=1208&amp;h=314&amp;f=gif&amp;s=207241" alt=""></p> <p>我们从最简单的入手，不考虑其它，先写一个基本的 Alert 组件。</p> <p>在 <code>src/component</code> 下新建 <code>alert</code> 目录，并创建文件 <code>alert.vue</code>：</p> <p>通知可以是多个，我们用一个数组 <code>notices</code> 来管理每条通知：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;!-- alert.vue --&gt;
+&lt;template&gt;
+  &lt;div class=&quot;alert&quot;&gt;
+    &lt;div class=&quot;alert-main&quot; v-for=&quot;item in notices&quot; :key=&quot;item.name&quot;&gt;
+      &lt;div class=&quot;alert-content&quot;&gt;{{ item.content }}&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    data () {
+      return {
+        notices: []
+      }
+    }
+  }
+&lt;/script&gt;
+&lt;style&gt;
+  .alert{
+    position: fixed;
+    width: 100%;
+    top: 16px;
+    left: 0;
+    text-align: center;
+    pointer-events: none;
+  }
+  .alert-content{
+    display: inline-block;
+    padding: 8px 16px;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+    margin-bottom: 8px;
+  }
+&lt;/style&gt;
+
+</code></pre></div><p>Alert 组件不同于常规的组件使用方式，它最终是通过 JS 来调用的，因此组件不用预留 props 和 events 接口。</p> <p>接下来，只要给数组 <code>notices</code> 增加数据，这个提示组件就能显示内容了，我们先假设，最终会通过 JS 调用 Alert 的一个方法 <code>add</code>，并将 <code>content</code> 和 <code>duration</code> 传入进来：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;!-- alert.vue，部分代码省略 --&gt;
+&lt;script&gt;
+  let seed = 0;
+
+  function getUuid() {
+    return 'alert_' + (seed++);
+  }
+
+  export default {
+    data () {
+      return {
+        notices: []
+      }
+    },
+    methods: {
+      add (notice) {
+        const name = getUuid();
+
+        let _notice = Object.assign({
+          name: name
+        }, notice);
+
+        this.notices.push(_notice);
+
+        // 定时移除，单位：秒
+        const duration = notice.duration;
+        setTimeout(() =&gt; {
+          this.remove(name);
+        }, duration * 1000);
+      },
+      remove (name) {
+        const notices = this.notices;
+
+        for (let i = 0; i &lt; notices.length; i++) {
+          if (notices[i].name === name) {
+            this.notices.splice(i, 1);
+            break;
+          }
+        }
+      }
+    }
+  }
+&lt;/script&gt;
+
+</code></pre></div><p>在 <code>add</code> 方法中，给每一条传进来的提示数据，加了一个不重复的 <code>name</code> 字段来标识，并通过 <code>setTimeout</code> 创建了一个计时器，当到达指定的 <code>duration</code> 持续时间后，调用 <code>remove</code> 方法，将对应 <code>name</code> 的那条提示信息找到，并从数组中移除。</p> <p>由这个思路，Alert 组件就可以无限扩展，只要在 add 方法中传递更多的参数，就能支持更复杂的组件，比如是否显示手动关闭按钮、确定 / 取消按钮，甚至传入一个 Render 函数都可以，完成本例后，读者可以尝试”改造“。</p> <h2 id="_2-3-实例化封装"><a href="#_2-3-实例化封装" class="header-anchor">#</a> 2/3 实例化封装</h2> <p>这一步，我们对 Alert 组件进一步封装，让它能够实例化，而不是常规的组件使用方法。实例化组件我们在第 8 节中介绍过，可以使用 Vue.extend 或 new Vue，然后用 $mount 挂载到 body 节点下。</p> <p>在 <code>src/components/alert</code> 目录下新建 <code>notification.js</code> 文件：</p> <div class="language- extra-class"><pre class="language-text"><code>// notification.js
+import Alert from './alert.vue';
+import Vue from 'vue';
+
+Alert.newInstance = properties =&gt; {
+  const props = properties || {};
+
+  const Instance = new Vue({
+    data: props,
+    render (h) {
+      return h(Alert, {
+        props: props
+      });
+    }
+  });
+
+  const component = Instance.$mount();
+  document.body.appendChild(component.$el);
+
+  const alert = Instance.$children[0];
+
+  return {
+    add (noticeProps) {
+      alert.add(noticeProps);
+    },
+    remove (name) {
+      alert.remove(name);
+    }
+  }
+};
+
+export default Alert;
+
+</code></pre></div><p>notification.js 并不是最终的文件，它只是对 alert.vue 添加了一个方法 <code>newInstance</code>。虽然 alert.vue 包含了 template、script、style 三个标签，并不是一个 JS 对象，那怎么能够给它扩展一个方法 <code>newInstance</code> 呢？事实上，alert.vue 会被 Webpack 的 vue-loader 编译，把 template 编译为 Render 函数，最终就会成为一个 JS 对象，自然可以对它进行扩展。</p> <p>Alert 组件没有任何 props，这里在 Render Alert 组件时，还是给它加了 props，当然，这里的 props 是空对象 {}，而且即使传了内容，也不起作用。这样做的目的还是为了扩展性，如果要在 Alert 上添加 props 来支持更多特性，是要在这里传入的。不过话说回来，因为能拿到 Alert 实例，用 data 或 props 都是可以的。</p> <p>在第 8 节已经解释过，<code>const alert = Instance.$children[0];</code>，这里的 alert 就是 Render 的 Alert 组件实例。在 <code>newInstance</code> 里，使用闭包暴露了两个方法 <code>add</code> 和 <code>remove</code>。这里的 add 和 remove 可不是 alert.vue 里的 add 和 remove，它们只是名字一样。</p> <h2 id="_3-3-入口"><a href="#_3-3-入口" class="header-anchor">#</a> 3/3 入口</h2> <p>最后要做的，就是调用 notification.js 创建实例，并通过 <code>add</code> 把数据传递过去，这是组件开发的最后一步，也是最终的入口。在 <code>src/component/alert</code> 下创建文件 <code>alert.js</code>：</p> <div class="language- extra-class"><pre class="language-text"><code>// alert.js
+import Notification from './notification.js';
+
+let messageInstance;
+
+function getMessageInstance () {
+  messageInstance = messageInstance || Notification.newInstance();
+  return messageInstance;
+}
+
+function notice({ duration = 1.5, content = '' }) {
+  let instance = getMessageInstance();
+
+  instance.add({
+    content: content,
+    duration: duration
+  });
+}
+
+export default {
+  info (options) {
+    return notice(options);
+  }
+}
+
+</code></pre></div><p><code>getMessageInstance</code> 函数用来获取实例，它不会重复创建，如果 messageInstance 已经存在，就直接返回了，只在第一次调用 Notification 的 <code>newInstance</code> 时来创建实例。</p> <p>alert.js 对外提供了一个方法 <code>info</code>，如果需要各种显示效果，比如成功的、失败的、警告的，可以在 info 下面提供更多的方法，比如 success、fail、warning 等，并传递不同参数让 Alert.vue 知道显示哪种状态的图标。本例因为只有一个 info，事实上也可以省略掉，直接导出一个默认的函数，这样在调用时，就不用 <code>this.$Alert.info()</code> 了，直接 <code>this.$Alert()</code>。</p> <p>来看一下显示一个信息提示组件的流程：</p> <p><img src="https://user-gold-cdn.xitu.io/2018/11/10/166fcc0fe6df06d2?w=1800&amp;h=180&amp;f=png&amp;s=47285" alt=""></p> <p>最后把 alert.js 作为插件注册到 Vue 里就行，在入口文件 <code>src/main.js</code>中，通过 <code>prototype</code> 给 Vue 添加一个实例方法：</p> <div class="language- extra-class"><pre class="language-text"><code>// src/main.js
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import Alert from '../src/components/alert/alert.js'
+
+Vue.config.productionTip = false
+
+Vue.prototype.$Alert = Alert
+
+new Vue({
+  router,
+  render: h =&gt; h(App)
+}).$mount('#app')
+
+
+</code></pre></div><p>这样在项目任何地方，都可以通过 <code>this.$Alert</code> 来调用 Alert 组件了，我们创建一个 alert 的路由，并在 <code>src/views</code> 下创建页面 <code>alert.vue</code>：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;!-- src/views/alert.vue --&gt;
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;button @click=&quot;handleOpen1&quot;&gt;打开提示 1&lt;/button&gt;
+    &lt;button @click=&quot;handleOpen2&quot;&gt;打开提示 2&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    methods: {
+      handleOpen1 () {
+        this.$Alert.info({
+          content: '我是提示信息 1'
+        });
+      },
+      handleOpen2 () {
+        this.$Alert.info({
+          content: '我是提示信息 2',
+          duration: 3
+        });
+      }
+    }
+  }
+&lt;/script&gt;
+
+</code></pre></div><p><code>duration</code> 如果不传入，默认是 1.5 秒。</p> <p>以上就是全局通知组件的全部内容。</p> <h2 id="友情提示"><a href="#友情提示" class="header-anchor">#</a> 友情提示</h2> <p>本示例算是一个 MVP（最小化可行方案），要开发一个完善的全局通知组件，还需要更多可维护性和功能性的设计，但离不开本例的设计思路。以下几点是同类组件中值得注意的：</p> <ol><li>Alert.vue 的最外层是有一个 .alert 节点的，它会在第一次调用 <code>$Alert</code> 时，在 body 下创建，因为不在 <code>&lt;router-view&gt;</code> 内，它不受路由的影响，也就是说一经创建，除非刷新页面，这个节点是不会消失的，所以在 alert.vue 的设计中，并没有主动销毁这个组件，而是维护了一个子节点数组 <code>notices</code>。</li> <li>.alert 节点是 <code>position: fixed</code> 固定的，因此要合理设计它的 <code>z-index</code>，否则可能被其它节点遮挡。</li> <li>notification.js 和 alert.vue 是可以复用的，如果还要开发其它同类的组件，比如二次确认组件 <code>$Confirm</code>, 只需要再写一个入口 <code>confirm.js</code>，并将 <code>alert.vue</code> 进一步封装，将 <code>notices</code> 数组的循环体写为一个新的组件，通过配置来决定是渲染 Alert 还是 Confirm，这在可维护性上是友好的。</li> <li>在 notification.js 的 new Vue 时，使用了 Render 函数来渲染 alert.vue，这是因为使用 template 在 runtime 的 Vue.js 版本下是会报错的。</li> <li>本例的 content 只能是字符串，如果要显示自定义的内容，除了用 <code>v-html</code> 指令，也能用 Functional Render（之后章节会介绍）。</li></ol> <h2 id="结语"><a href="#结语" class="header-anchor">#</a> 结语</h2> <p>Vue.js 的精髓是组件，组件的精髓是 JavaScript。将 JavaScript 开发中的技巧结合 Vue.js 组件，就能玩出不一样的东西。</p> <p>注：本节部分代码参考 <a href="https://github.com/iview/iview/tree/2.0/src/components/base/notification" target="_blank" rel="noopener noreferrer">iView<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>。</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">最近更新:</span> <span class="time">2020-01-03 03:19:42</span></div></footer> <!----> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.6215b15e.js" defer></script><script src="/assets/js/8.5391eac4.js" defer></script><script src="/assets/js/1.97d2ef8e.js" defer></script><script src="/assets/js/2.ac1a40e0.js" defer></script><script src="/assets/js/19.75cf190c.js" defer></script>
+  </body>
+</html>
