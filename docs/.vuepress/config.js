@@ -1,9 +1,7 @@
 const sidebarConfig = require('./config/sidebar')
 
-const isGitpage = process.env.isGitpage
-
 module.exports = {
-  base: isGitpage ? '/blog/' : '',
+  base: process.env.CI ? '/blog/' : '',
   title: 'wangjunget',
   plugins: [
     [
