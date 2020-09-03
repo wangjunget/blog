@@ -3,7 +3,7 @@ const sidebarConfig = require('./config/sidebar')
 const isGitpage = process.env.isGitpage
 
 module.exports = {
-  base: isGitpage ? '/blog-vuepress/' : '',
+  base: isGitpage ? '/blog/' : '',
   title: 'wangjunget',
   plugins: [
     [
@@ -18,11 +18,29 @@ module.exports = {
     ],
     ['@vuepress/back-to-top'],
     [
-      'vuepress-plugin-container',
+      require('./plugins/demo-block'),
       {
-        type: 'css',
-        before: info => `<div class="theorem"><p class="title">${info}</p>`,
-        after: '</div>',
+        component: 'DemoBlock',
+        locales: [
+          {
+            "lang": "zh-CN",
+            "demo-block": {
+              "hide-text": "隐藏",
+              "show-text": "显示",
+              "copy-text": "复制",
+              "copy-success": "成功"
+            }
+          },
+          {
+            "lang": "en-US",
+            "demo-block": {
+              "hide-text": "Hide",
+              "show-text": "Expand",
+              "copy-text": "Copy",
+              "copy-success": "Successful"
+            }
+          }
+        ]
       }
     ],
     [
