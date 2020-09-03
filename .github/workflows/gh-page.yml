@@ -22,6 +22,7 @@ jobs:
           npm run docs:build
         env:
           CI: true
+          isGitpage: true
         
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
